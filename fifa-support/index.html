@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Digital Education Programme support</title>
+    <meta
+      name="description"
+      content="Support page for educational kits distributed through the FIFA Foundation Digital Education Programme."
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#support-form" data-i18n="skipLink">Skip to support form</a>
+
+    <header class="site-header">
+      <nav class="brand-bar" aria-label="Support page">
+        <a class="brand" href="./" aria-label="Digital Education Programme support home">
+          <span class="brand-mark" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </span>
+          <span class="brand-name">FIFA Foundation &amp; Raco Systems Corp.</span>
+        </a>
+        <div class="header-tools">
+          <span class="project-label" data-i18n="projectLabel">Programme support</span>
+          <label class="language-picker">
+            <span data-i18n="languageLabel">Language</span>
+            <select id="language-select" aria-label="Language">
+              <option value="en">EN</option>
+              <option value="fr">FR</option>
+              <option value="es">ES</option>
+              <option value="pt">PT</option>
+            </select>
+          </label>
+        </div>
+      </nav>
+
+      <div class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">FIFA FOUNDATION</p>
+          <h1 data-i18n="heroTitle">Digital Education Programme support</h1>
+          <p data-i18n="heroIntro">
+            Use this page to report a problem with your kit or request technical assistance.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="kit-card" id="kit-summary" aria-labelledby="kit-summary-title">
+        <div>
+          <p class="eyebrow" data-i18n="currentKit">Current kit</p>
+          <h2 id="kit-summary-title">Kit identified</h2>
+          <p class="kit-help" id="kit-status-message">
+            Your Kit ID has been detected automatically from the QR code.
+          </p>
+        </div>
+
+        <dl class="kit-details">
+          <div>
+            <dt data-i18n="kitId">Kit ID</dt>
+            <dd id="kit-id-display">Not detected</dd>
+          </div>
+          <div>
+            <dt data-i18n="kitType">Kit Type</dt>
+            <dd id="kit-type-display">Pending identification</dd>
+          </div>
+        </dl>
+
+        <div class="manual-kit" id="manual-kit-entry" hidden>
+          <label for="manual-kit-id" data-i18n="manualKitLabel">Kit ID printed next to the QR code</label>
+          <div class="manual-kit-row">
+            <input
+              id="manual-kit-id"
+              name="manual_kit_id"
+              type="text"
+              inputmode="latin"
+              autocomplete="off"
+              maxlength="16"
+              placeholder="SR-2607-A-000001"
+              aria-describedby="manual-kit-help"
+            >
+            <button class="secondary-button" type="button" id="apply-kit-id" data-i18n="useKitId">Use Kit ID</button>
+          </div>
+          <p class="field-help" id="manual-kit-help">
+            Format: SR-YYMM-A-000001 for Robotics or SP-YYMM-A-000001 for Physical Computing.
+          </p>
+        </div>
+      </section>
+
+      <section class="actions" aria-label="Main actions">
+        <a class="action-card primary-action" href="#support-form">
+          <span class="action-icon" aria-hidden="true">!</span>
+          <span>
+            <strong data-i18n="reportIssue">Report a Kit Issue</strong>
+            <small data-i18n="reportIssueHint">Send a support request with the Kit ID included automatically.</small>
+          </span>
+        </a>
+        <!-- TODO: Replace with the final learning resources URL -->
+        <button class="action-card resource-action" id="resources-link" type="button" disabled>
+          <span class="action-icon" aria-hidden="true">?</span>
+          <span>
+            <strong data-i18n="resources">Access Guides and Resources</strong>
+            <small data-i18n="resourcesHint">Learning materials link coming soon.</small>
+          </span>
+        </button>
+      </section>
+
+      <section class="form-shell" aria-labelledby="form-title">
+        <div class="section-intro">
+          <p class="eyebrow" data-i18n="supportRequest">Support request</p>
+          <h2 id="form-title" data-i18n="reportIssue">Report a Kit Issue</h2>
+          <p data-i18n="formIntro">
+            Please complete the form below. Your Kit ID is included automatically so our
+            support team can identify the product and its production record.
+          </p>
+        </div>
+
+        <div class="status-message" id="form-status" aria-live="polite"></div>
+
+        <form id="support-form" novalidate>
+          <input type="hidden" name="kit_id" id="kit-id-input">
+          <input type="hidden" name="kit_type" id="kit-type-input">
+          <input type="hidden" name="page_url" id="page-url-input">
+          <input type="hidden" name="submitted_at" id="submitted-at-input">
+
+          <div class="honeypot" aria-hidden="true">
+            <label for="website">Website</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+
+          <fieldset>
+            <legend data-i18n="contactInfo">Contact information</legend>
+            <div class="form-grid">
+              <div class="field">
+                <label for="institution" data-i18n="institution">School or Institution</label>
+                <input id="institution" name="institution" type="text" maxlength="120" autocomplete="organization" required>
+              </div>
+              <div class="field">
+                <label for="full-name" data-i18n="fullName">Full Name</label>
+                <input id="full-name" name="full_name" type="text" maxlength="120" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="email" data-i18n="email">Email Address</label>
+                <input id="email" name="email" type="email" maxlength="160" autocomplete="email" required>
+              </div>
+              <div class="field">
+                <label for="phone"><span data-i18n="phone">Phone or WhatsApp</span> <span data-i18n="optional">optional</span></label>
+                <input id="phone" name="phone" type="text" maxlength="60" autocomplete="tel">
+              </div>
+              <div class="field">
+                <label for="country" data-i18n="country">Country</label>
+                <input id="country" name="country" type="text" maxlength="80" value="Bhutan" autocomplete="country-name" readonly required>
+              </div>
+              <div class="field">
+                <label for="city-district" data-i18n="cityDistrict">City or District</label>
+                <input id="city-district" name="city_district" type="text" maxlength="120" autocomplete="address-level2" required>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend data-i18n="issueDetails">Issue details</legend>
+            <div class="form-grid">
+              <div class="field">
+                <label for="component" data-i18n="component">Affected Component</label>
+                <select id="component" name="component" required>
+                  <option value="">Select the affected component</option>
+                </select>
+              </div>
+              <div class="field" id="other-component-field" hidden>
+                <label for="other-component" data-i18n="otherComponent">If Other, which component?</label>
+                <input id="other-component" name="other_component" type="text" maxlength="120">
+              </div>
+              <div class="field">
+                <label for="issue-category" data-i18n="issueCategory">Issue Category</label>
+                <select id="issue-category" name="issue_category" required>
+                  <option value="">Select an issue category</option>
+                  <option>Missing component</option>
+                  <option>Damaged component</option>
+                  <option>Component not working</option>
+                  <option>Connection problem</option>
+                  <option>Programming or firmware issue</option>
+                  <option>Power problem</option>
+                  <option>Incorrect component</option>
+                  <option>Documentation question</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="description" data-i18n="description">Problem Description</label>
+              <textarea
+                id="description"
+                name="description"
+                minlength="20"
+                maxlength="2000"
+                rows="6"
+                required
+                aria-describedby="description-help"
+              ></textarea>
+              <p class="field-help" id="description-help" data-i18n="descriptionHelp">
+                Please describe what happened, what you expected, and any troubleshooting steps already attempted.
+              </p>
+            </div>
+
+            <div class="field">
+              <label for="troubleshooting"><span data-i18n="troubleshooting">Previous Troubleshooting</span> <span data-i18n="optional">optional</span></label>
+              <textarea
+                id="troubleshooting"
+                name="troubleshooting"
+                maxlength="1200"
+                rows="4"
+                placeholder="For example: checked the cables, restarted the board, tried another port, or tested the component in another kit."
+              ></textarea>
+            </div>
+
+            <div class="field file-field" id="file-upload-field">
+              <label for="evidence"><span data-i18n="evidence">Attach photos or a short video</span> <span data-i18n="optional">optional</span></label>
+              <input id="evidence" name="evidence" type="file" accept=".jpg,.jpeg,.png,.pdf,.mp4,.mov">
+              <p class="field-help" data-i18n="evidenceHelp">
+                Please avoid including personal information about students. Maximum file size: 15 MB.
+              </p>
+            </div>
+            <!-- TODO: Hide or replace the file input if the selected backend cannot accept uploads. -->
+          </fieldset>
+
+          <label class="consent">
+            <input id="consent" name="consent" type="checkbox" required>
+            <span data-i18n="consent">I confirm that the information provided is accurate and may be used to process this support request.</span>
+          </label>
+
+          <button class="submit-button" id="submit-button" type="submit" disabled data-i18n="submit">
+            Submit Support Request
+          </button>
+        </form>
+
+        <div class="success-card" id="success-state" hidden>
+          <p class="eyebrow" data-i18n="requestSubmitted">Request submitted</p>
+          <h2 data-i18n="successTitle">Thank you. Your support request has been submitted successfully.</h2>
+          <p id="success-kit-id">Kit ID:</p>
+          <p id="ticket-reference" hidden></p>
+          <p data-i18n="successHint">Please keep this reference for future communication with support.</p>
+          <button class="secondary-button" type="button" id="submit-another" data-i18n="submitAnother">Submit another report</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>FIFA Foundation &amp; Raco Systems Corp. support service.</p>
+      <p>
+        <a href="mailto:support@smartteamdigital.com">Contact</a>
+        <span aria-hidden="true">/</span>
+        <a href="https://smartteamdigital.com/" target="_blank" rel="noopener">Privacy</a>
+      </p>
+    </footer>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
