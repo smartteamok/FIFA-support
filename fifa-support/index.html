@@ -162,9 +162,17 @@
           <fieldset>
             <legend data-i18n="issueDetails">Issue details</legend>
             <div class="form-grid">
-              <div class="field">
-                <label for="component" data-i18n="component">Affected Component</label>
-                <select id="component" name="component" required>
+              <div class="field component-field">
+                <label id="component-label" for="component" data-i18n="component">Affected Component</label>
+                <p class="field-help" data-i18n="componentHelp">Tap the component that has the problem.</p>
+                <div
+                  class="component-picker"
+                  id="component-picker"
+                  role="listbox"
+                  aria-labelledby="component-label"
+                  aria-required="true"
+                ></div>
+                <select id="component" name="component" required hidden>
                   <option value="">Select the affected component</option>
                 </select>
               </div>

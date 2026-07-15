@@ -396,6 +396,79 @@ legend {
   gap: 1rem;
 }
 
+.component-field {
+  grid-column: 1 / -1;
+}
+
+.component-picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+  gap: 0.75rem;
+}
+
+.component-option {
+  display: grid;
+  gap: 0.55rem;
+  align-content: start;
+  min-height: 148px;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface-soft);
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  padding: 0.7rem;
+  text-align: center;
+  transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.component-option img,
+.component-option-placeholder {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 14px;
+  background: #0b0b0b;
+  object-fit: contain;
+}
+
+.component-option-placeholder {
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 850;
+  background: linear-gradient(160deg, var(--blue), var(--blue-deep));
+}
+
+.component-option-label {
+  font-size: 0.84rem;
+  line-height: 1.25;
+}
+
+.component-option:hover {
+  transform: translateY(-2px);
+  border-color: var(--blue-light);
+}
+
+.component-option.is-selected,
+.component-option[aria-selected="true"] {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(236, 102, 8, 0.18);
+  background: #fff;
+}
+
+.component-picker.is-invalid {
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.12);
+}
+
+.component-picker.is-invalid .component-option {
+  border-color: rgba(180, 35, 24, 0.35);
+}
+
 .field {
   display: grid;
   gap: 0.45rem;
@@ -434,7 +507,8 @@ input:focus,
 select:focus,
 textarea:focus,
 button:focus-visible,
-a:focus-visible {
+a:focus-visible,
+.component-option:focus-visible {
   outline: 3px solid rgba(91, 197, 242, 0.78);
   outline-offset: 3px;
 }
@@ -583,6 +657,10 @@ button:disabled {
   .manual-kit-row {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .component-picker {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .submit-button,

@@ -106,12 +106,15 @@ Main interface text is translated in `TRANSLATIONS` inside `app.js`. The selecto
 
 ## Components
 
-Component dropdowns are populated according to the detected kit type:
+Component thumbnails are populated according to the detected kit type:
 
 - `SR-` shows Robotics Kit components from the Bhutan kit component list and robotics kit PDF.
 - `SP-` shows Physical Computing Kit components from the Bhutan kit component list and kit PDF.
 
-To update components later, edit `COMPONENTS_BY_KIT_TYPE` in `app.js`.
+Images live in `assets/components/`. Map filenames in `COMPONENT_IMAGES` inside `app.js`.
+To update the lists later, edit `COMPONENTS_BY_KIT_TYPE` in `app.js`.
+
+Deploy must include the `assets/` folder next to `index.html`.
 
 ## Future API lookup
 

@@ -11,6 +11,35 @@ const KIT_TYPES = {
   SP: "Physical Computing Kit",
 };
 
+const COMPONENT_IMAGE_BASE = "assets/components/";
+
+const COMPONENT_IMAGES = {
+  "Continuous Rotation Servo": "continuous-rotation-servo.png",
+  "Caster Wheel": "caster-wheel.png",
+  "Color Sensor Module": "color-sensor.png",
+  "DC Encoder Motor": "dc-encoder-motor.png",
+  "Joystick Module": "joystick-module.png",
+  "LCD Module": "lcd-module.png",
+  "Line Tracking Sensor": "line-tracking-sensor.png",
+  "Mechanical Chassis Kit": "mechanical-chassis-kit.png",
+  Tool: "tool.png",
+  "Potentiometer Module": "potentiometer.png",
+  "Power Adapter / Charger": "power-adapter.png",
+  "Soil Moisture Sensor": "soil-moisture-sensor.png",
+  "Ultrasonic Distance Sensor": "ultrasonic-distance-sensor.png",
+  Wheel: "wheel.png",
+  "Accessory & Screw Set": "accessory-screw-set.png",
+  "Jumper Wires (Female-to-Female)": "jumper-female-female.png",
+  "Micro:bit Expansion Shield": "microbit-expansion-shield.png",
+  "180° Servomotor": "180-servomotor.png",
+  "RGB LED Strip": "rgb-led-strip.png",
+  "Plastic Ball": "plastic-ball.png",
+  "Alligator Clip Wires": "alligator-clip-wires.png",
+  "Jumper Wires (Male-to-Male)": "jumper-male-male.png",
+  "Jumper Wires (Male-to-Female)": "jumper-male-female.png",
+  Batteries: "batteries.png",
+};
+
 const COMPONENTS_BY_KIT_TYPE = {
   "Robotics Kit": [
     "Continuous Rotation Servo",
@@ -105,6 +134,7 @@ const TRANSLATIONS = {
     issueDetails: "Issue details",
     component: "Affected Component",
     selectComponent: "Select the affected component",
+    componentHelp: "Tap the component that has the problem.",
     otherComponent: "If Other, which component?",
     issueCategory: "Issue Category",
     description: "Problem Description",
@@ -158,6 +188,7 @@ const TRANSLATIONS = {
     issueDetails: "Details du probleme",
     component: "Composant concerne",
     selectComponent: "Selectionnez le composant concerne",
+    componentHelp: "Touchez le composant qui pose probleme.",
     otherComponent: "Si Autre, quel composant ?",
     issueCategory: "Categorie du probleme",
     description: "Description du probleme",
@@ -189,6 +220,7 @@ const TRANSLATIONS = {
     issueDetails: "Detalle del problema",
     component: "Componente afectado",
     selectComponent: "Seleccione el componente afectado",
+    componentHelp: "Toque el componente que tiene el problema.",
     otherComponent: "Si es Otro, cual?",
     issueCategory: "Categoria del problema",
     description: "Descripcion del problema",
@@ -220,6 +252,7 @@ const TRANSLATIONS = {
     issueDetails: "Detalhes do problema",
     component: "Componente afetado",
     selectComponent: "Selecione o componente afetado",
+    componentHelp: "Toque o componente com o problema.",
     otherComponent: "Se Outro, qual componente?",
     issueCategory: "Categoria do problema",
     description: "Descricao do problema",
@@ -286,6 +319,7 @@ function cacheElements() {
   elements.countryInput = document.getElementById("country");
   elements.cityDistrictInput = document.getElementById("city-district");
   elements.componentSelect = document.getElementById("component");
+  elements.componentPicker = document.getElementById("component-picker");
   elements.issueCategorySelect = document.getElementById("issue-category");
   elements.descriptionInput = document.getElementById("description");
   elements.troubleshootingInput = document.getElementById("troubleshooting");
@@ -397,11 +431,65 @@ function populateComponents(kitType) {
   appendOption(elements.componentSelect, "", t("selectComponent"));
   options.forEach((component) => appendOption(elements.componentSelect, component, component));
 
-  if (options.includes(currentValue)) {
-    elements.componentSelect.value = currentValue;
-  }
+  const selectedValue = options.includes(currentValue) ? currentValue : "";
+  elements.componentSelect.value = selectedValue;
+  renderComponentPicker(options, selectedValue);
+  handleComponentChange();
+}
+
+function renderComponentPicker(options, selectedValue) {
+  elements.componentPicker.textContent = "";
+
+  options.forEach((component) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "component-option";
+    button.dataset.value = component;
+    button.setAttribute("role", "option");
+    button.setAttribute("aria-selected", component === selectedValue ? "true" : "false");
+    if (component === selectedValue) {
+      button.classList.add("is-selected");
+    }
+
+    const imageFile = COMPONENT_IMAGES[component];
+    if (imageFile) {
+      const image = document.createElement("img");
+      image.src = `${COMPONENT_IMAGE_BASE}${imageFile}`;
+      image.alt = "";
+      image.loading = "lazy";
+      button.appendChild(image);
+    } else {
+      const placeholder = document.createElement("span");
+      placeholder.className = "component-option-placeholder";
+      placeholder.setAttribute("aria-hidden", "true");
+      placeholder.textContent = component === "Other" ? "?" : component.slice(0, 1).toUpperCase();
+      button.appendChild(placeholder);
+    }
+
+    const label = document.createElement("span");
+    label.className = "component-option-label";
+    label.textContent = component;
+    button.appendChild(label);
+
+    button.addEventListener("click", () => selectComponent(component));
+    elements.componentPicker.appendChild(button);
+  });
+}
+
+function selectComponent(component) {
+  elements.componentSelect.value = component;
+  elements.componentSelect.removeAttribute("aria-invalid");
+  elements.componentPicker.classList.remove("is-invalid");
+
+  elements.componentPicker.querySelectorAll(".component-option").forEach((option) => {
+    const isSelected = option.dataset.value === component;
+    option.classList.toggle("is-selected", isSelected);
+    option.setAttribute("aria-selected", isSelected ? "true" : "false");
+  });
 
   handleComponentChange();
+  clearStatus();
+  updateSubmitAvailability();
 }
 
 function refreshKitCopy() {
@@ -487,7 +575,16 @@ function validateForm() {
     return t("spamError");
   }
 
-  const requiredFields = Array.from(elements.form.querySelectorAll("[required]"));
+  if (!elements.componentSelect.value) {
+    elements.componentPicker.classList.add("is-invalid");
+    const firstOption = elements.componentPicker.querySelector(".component-option");
+    if (firstOption) firstOption.focus();
+    return t("requiredFields");
+  }
+
+  const requiredFields = Array.from(elements.form.querySelectorAll("[required]")).filter(
+    (field) => field !== elements.componentSelect
+  );
   const missingField = requiredFields.find((field) => {
     if (field.type === "checkbox") return !field.checked;
     return !field.value.trim();
@@ -550,6 +647,7 @@ function clearInvalidStates() {
   elements.form.querySelectorAll("[aria-invalid='true']").forEach((field) => {
     field.removeAttribute("aria-invalid");
   });
+  elements.componentPicker.classList.remove("is-invalid");
 }
 
 function markInvalid(field) {
@@ -605,7 +703,7 @@ function resetForAnotherReport() {
   elements.pageUrlInput.value = window.location.href;
   elements.countryInput.value = "Bhutan";
   updateSubmitText();
-  handleComponentChange();
+  populateComponents(state.kitType || "fallback");
   clearStatus();
   updateSubmitAvailability();
 }
