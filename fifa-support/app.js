@@ -37,7 +37,6 @@ const COMPONENT_IMAGES = {
   "Alligator Clip Wires": "alligator-clip-wires.png",
   "Jumper Wires (Male-to-Male)": "jumper-male-male.png",
   "Jumper Wires (Male-to-Female)": "jumper-male-female.png",
-  Batteries: "batteries.png",
 };
 
 const COMPONENTS_BY_KIT_TYPE = {
@@ -69,11 +68,6 @@ const COMPONENTS_BY_KIT_TYPE = {
     "Alligator Clip Wires",
     "Jumper Wires (Male-to-Male)",
     "Jumper Wires (Male-to-Female)",
-    "micro:bit",
-    "Micro USB Cable",
-    "Batteries",
-    "Battery Holder",
-    "Wearable",
     "Storage Box",
     "Other",
   ],
@@ -461,6 +455,9 @@ function renderComponentPicker(options, selectedValue) {
     } else {
       const placeholder = document.createElement("span");
       placeholder.className = "component-option-placeholder";
+      if (component === "Other") {
+        placeholder.classList.add("is-other");
+      }
       placeholder.setAttribute("aria-hidden", "true");
       placeholder.textContent = component === "Other" ? "?" : component.slice(0, 1).toUpperCase();
       button.appendChild(placeholder);

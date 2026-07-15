@@ -430,7 +430,7 @@ legend {
   width: 100%;
   aspect-ratio: 1;
   border-radius: 14px;
-  background: #0b0b0b;
+  background: #c5ccd3;
   object-fit: contain;
 }
 
@@ -441,6 +441,10 @@ legend {
   font-size: 1.8rem;
   font-weight: 850;
   background: linear-gradient(160deg, var(--blue), var(--blue-deep));
+}
+
+.component-option-placeholder.is-other {
+  background: linear-gradient(160deg, var(--orange), #c24d06);
 }
 
 .component-option-label {
