@@ -92,28 +92,10 @@ main,
   text-decoration: none;
 }
 
-.brand-mark {
-  display: grid;
-  grid-template-columns: repeat(2, 18px);
-  gap: 3px;
-}
-
-.brand-mark span {
-  width: 18px;
-  height: 18px;
-  border-radius: 6px;
-}
-
-.brand-mark span:nth-child(1) { background: var(--blue-light); }
-.brand-mark span:nth-child(2) { background: #fdbb2a; }
-.brand-mark span:nth-child(3) { background: #796ab0; }
-.brand-mark span:nth-child(4) { background: var(--green); }
-
-.brand-name {
-  color: var(--blue-deep);
-  font-size: 1.08rem;
-  font-weight: 850;
-  letter-spacing: 0;
+.brand-logo {
+  display: block;
+  width: min(220px, 46vw);
+  height: auto;
 }
 
 .header-tools {
