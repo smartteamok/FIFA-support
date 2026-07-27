@@ -8,10 +8,10 @@ Static support page for educational kits distributed through the FIFA Foundation
 - `styles.css`
 - `app.js`
 
-Deploy the whole `fifa-support/` folder under:
+Deploy the whole `dep-support/` folder under:
 
 ```text
-https://smartteamdigital.com/fifa-support/
+https://fifafoundation.smartteamdigital.com/dep-support/
 ```
 
 ## Kit ID behavior
@@ -19,7 +19,7 @@ https://smartteamdigital.com/fifa-support/
 The page reads the kit serial from the URL query parameter named `id`.
 
 ```text
-https://smartteamdigital.com/fifa-support/?id=SR-2607-A-000001
+https://fifafoundation.smartteamdigital.com/dep-support/?id=SR-2607-A-000001
 ```
 
 Accepted formats:
@@ -39,25 +39,25 @@ If the parameter is missing or invalid, the page asks the teacher to manually en
 ## Test URLs
 
 ```text
-http://localhost:8000/fifa-support/?id=SR-2607-A-000001
+http://localhost:8000/dep-support/?id=SR-2607-A-000001
 ```
 
 Expected: `Robotics Kit`, `Kit ID: SR-2607-A-000001`.
 
 ```text
-http://localhost:8000/fifa-support/?id=SP-2607-A-000001
+http://localhost:8000/dep-support/?id=SP-2607-A-000001
 ```
 
 Expected: `Physical Computing Kit`, `Kit ID: SP-2607-A-000001`.
 
 ```text
-http://localhost:8000/fifa-support/
+http://localhost:8000/dep-support/
 ```
 
 Expected: manual Kit ID entry is requested.
 
 ```text
-http://localhost:8000/fifa-support/?id=INVALID
+http://localhost:8000/dep-support/?id=INVALID
 ```
 
 Expected: the Kit ID is rejected and manual entry is requested.
@@ -133,28 +133,28 @@ Use this later to call Raco Systems APIs, Odoo, Supabase, or Firebase. Keep priv
 This folder is ready to commit from the repository root:
 
 ```sh
-git add fifa-support
+git add dep-support
 git commit -m "Add FIFA Foundation kit support page"
 ```
 
 To push to GitHub under the `smartteamok` account, create a GitHub repository first, then add its remote:
 
 ```sh
-git remote add origin git@github.com:smartteamok/fifa-support.git
+git remote add origin git@github.com:smartteamok/FIFA-support.git
 git branch -M main
 git push -u origin main
 ```
 
-To share it with the web team, send them the GitHub repository link and ask them to deploy the `fifa-support/` folder to:
+To share it with the web team, send them the GitHub repository link and ask them to deploy the `dep-support/` folder to:
 
 ```text
-https://smartteamdigital.com/fifa-support/
+https://fifafoundation.smartteamdigital.com/dep-support/
 ```
 
 For WordPress, the simplest deployment options are:
 
-1. Upload the `fifa-support/` folder to the site root using hosting file manager/SFTP, so it sits beside the WordPress files.
-2. If direct static-folder upload is not available, ask the web team to create a WordPress page at `/fifa-support/` and enqueue or embed the HTML/CSS/JS assets from this folder.
+1. Upload the `dep-support/` folder to the site root using hosting file manager/SFTP, so it sits beside the WordPress files.
+2. If direct static-folder upload is not available, ask the web team to create a WordPress page at `/dep-support/` and enqueue or embed the HTML/CSS/JS assets from this folder.
 3. Configure the final form endpoint in `app.js` before publishing.
 
 ## Manual test cases
