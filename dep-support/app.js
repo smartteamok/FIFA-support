@@ -1,6 +1,6 @@
 "use strict";
 
-const SUPPORT_FORM_ENDPOINT = "REPLACE_WITH_FINAL_ENDPOINT";
+const SUPPORT_FORM_ENDPOINT = "/api/support-request";
 const RESOURCES_URL = "";
 const MAX_FILE_SIZE_BYTES = 15 * 1024 * 1024;
 const KIT_ID_PATTERN = /^(SR|SP)-\d{4}-[A-Z]-\d{6}$/;
@@ -150,7 +150,6 @@ const TRANSLATIONS = {
     invalidEmail: "Please enter a valid email address.",
     shortDescription: "Please add a little more detail to the problem description.",
     fileTooLarge: "The attached file is too large. Please upload a file smaller than 15 MB.",
-    endpointMissing: "The support form endpoint has not been configured yet. Update SUPPORT_FORM_ENDPOINT in app.js before publishing.",
     submitting: "Submitting your support request...",
     submitError: "We could not submit your request. Please check your connection and try again.",
     successStatus: "Thank you. Your support request has been submitted successfully.",
@@ -528,22 +527,16 @@ async function handleSubmit(event) {
     return;
   }
 
-  if (SUPPORT_FORM_ENDPOINT === "REPLACE_WITH_FINAL_ENDPOINT") {
-    setStatus(t("endpointMissing"), "error");
-    return;
-  }
-
   state.isSubmitting = true;
   elements.submitButton.disabled = true;
   elements.submitButton.textContent = t("submittingButton");
   setStatus(t("submitting"), "info");
 
   try {
-    const payload = createPayload();
+    const payload = createSubmissionFormData();
     const response = await fetch(SUPPORT_FORM_ENDPOINT, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      body: payload,
     });
 
     if (!response.ok) {
@@ -611,8 +604,8 @@ function validateForm() {
   return "";
 }
 
-function createPayload() {
-  return {
+function createSubmissionFormData() {
+  const payload = {
     kit_id: state.kitId,
     kit_type: state.kitType,
     institution: elements.institutionInput.value,
@@ -630,7 +623,22 @@ function createPayload() {
     troubleshooting: elements.troubleshootingInput.value,
     page_url: window.location.href,
     submitted_at: elements.submittedAtInput.value,
+    language: state.language,
+    user_agent: window.navigator.userAgent,
+    website: elements.websiteInput.value,
   };
+
+  const formData = new FormData();
+  Object.entries(payload).forEach(([key, value]) => {
+    formData.append(key, String(value ?? ""));
+  });
+
+  const file = elements.evidenceInput.files[0];
+  if (file) {
+    formData.append("evidence", file, file.name);
+  }
+
+  return formData;
 }
 
 function trimTextInputs() {

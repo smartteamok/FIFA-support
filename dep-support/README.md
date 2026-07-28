@@ -64,22 +64,35 @@ Expected: the Kit ID is rejected and manual entry is requested.
 
 ## Configure form submission
 
-Open `app.js` and replace:
+The frontend submits to the Vercel API route:
 
 ```js
-const SUPPORT_FORM_ENDPOINT = "REPLACE_WITH_FINAL_ENDPOINT";
+const SUPPORT_FORM_ENDPOINT = "/api/support-request";
 ```
 
-The UI is backend-agnostic. It submits JSON with `fetch()` and keeps all vendor-specific details in the endpoint.
+The UI submits `multipart/form-data` with `fetch()` so evidence files can be uploaded. The Vercel API route sends the report by email through Resend.
 
-Recommended simple backend for WordPress:
+Configure these Vercel environment variables:
 
-1. Use a WordPress form plugin that stores entries in the WordPress database, such as Fluent Forms, Gravity Forms, or WPForms Pro.
-2. If the plugin provides a webhook or REST endpoint, point `SUPPORT_FORM_ENDPOINT` to that endpoint.
-3. Keep the WordPress plugin as the operational database for support reports.
-4. Add optional Google Sheets export/sync from the plugin if the team wants spreadsheet visibility.
+```text
+RESEND_API_KEY
+SUPPORT_EMAIL_FROM
+SUPPORT_EMAIL_TO
+```
 
-This is simpler and more reliable than making Google Sheets the primary database. Google Sheets is good for review and reporting, but WordPress database storage gives better validation, spam controls, file handling, admin access, and future migration to Odoo, Supabase, Firebase, or a Raco Systems API.
+Optional:
+
+```text
+SUPPORT_EMAIL_CC
+```
+
+See:
+
+```text
+../docs/vercel-resend.md
+```
+
+This is the simplest first backend because it removes WordPress from the submission path. The tradeoff is that email is not a database. If support volume grows, add WordPress/Fluent Forms, Supabase, Firebase, or Odoo later as the system of record.
 
 For a very fast MVP, Google Apps Script can receive the JSON and append rows to Google Sheets, but repeat all validation server-side and do not treat the sheet as secure production infrastructure.
 

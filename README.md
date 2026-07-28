@@ -25,3 +25,9 @@ Production target:
 ```text
 https://fifafoundation.smartteamdigital.com/dep-support/
 ```
+
+Backend setup:
+
+```text
+docs/vercel-resend.md
+```
