@@ -8,16 +8,16 @@
     <link rel="stylesheet" href="resources.css">
   </head>
   <body>
-    <a class="skip-link" href="#module-list">Skip to module guides</a>
+    <a class="skip-link" href="#module-list" data-i18n="skipLink">Skip to module guides</a>
     <header class="resources-header">
       <nav class="topbar" aria-label="Resources navigation">
         <a class="brand" href="../" aria-label="Back to FIFA Foundation support">
           <img src="../assets/fifa-foundation-logo.png" alt="FIFA Foundation" width="220" height="102">
         </a>
         <div class="topbar-actions">
-          <a class="back-link" href="../">Support page</a>
+          <a class="back-link" href="../" data-i18n="supportPage">Support page</a>
           <label class="language-picker">
-            <span>Language</span>
+            <span data-i18n="languageLabel">Language</span>
             <select id="language-select" aria-label="Language">
               <option value="en">EN</option>
               <option value="fr">FR</option>
@@ -32,7 +32,7 @@
         <h1 data-i18n="title">Guides and Resources</h1>
         <p class="hero-copy" data-i18n="intro">Practical module guides for the Digital Education Programme kit. Choose a component to review its setup, activity and first checks.</p>
         <div class="hero-meta" aria-label="Resource collection summary">
-          <span><strong>13</strong> <span data-i18n="modules">module guides</span></span>
+          <span><strong id="module-total">0</strong> <span data-i18n="modules">component guides</span></span>
           <span><strong>micro:bit V2</strong> <span data-i18n="platform">learning platform</span></span>
         </div>
       </div>
@@ -71,8 +71,8 @@
       </section>
     </main>
     <footer class="site-footer">
-      <p>FIFA Foundation &amp; Raco Systems Corp. support service.</p>
-      <p><a href="../">Support</a><span aria-hidden="true">/</span><a href="mailto:support@smartteamdigital.com">Contact</a></p>
+      <p data-i18n="footerService">FIFA Foundation &amp; Raco Systems Corp. support service.</p>
+      <p><a href="../" data-i18n="support">Support</a><span aria-hidden="true">/</span><a href="mailto:support@smartteamdigital.com" data-i18n="contact">Contact</a></p>
     </footer>
     <script src="resources.js" defer></script>
   </body>

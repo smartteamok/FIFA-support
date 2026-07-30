@@ -8,6 +8,7 @@ Static support page for educational kits distributed through the FIFA Foundation
 - `styles.css`
 - `app.js`
 - `resources/` - module guides and learning resources page
+- `success/` - confirmation page opened after a successful Formspree submission
 
 Deploy the whole `dep-support/` folder under:
 
@@ -21,7 +22,7 @@ The guides page is available at:
 https://fifafoundation.smartteamdigital.com/dep-support/resources/
 ```
 
-It currently includes 13 module guide outlines based on the FIFA micro:bit tutorial brief. Video links, wiring diagrams and source files are intentionally marked as coming soon until the final materials are approved. The first-check content is a review draft derived from the kit context, not a replacement for final safety instructions.
+It currently includes 29 component guide outlines based on the supplied kit PDF and FIFA micro:bit tutorial brief. Video links, wiring diagrams and source files are intentionally marked as coming soon until the final materials are approved. The first-check content is a review draft derived from the kit context, not a replacement for final safety instructions.
 
 ## Kit ID behavior
 
@@ -85,7 +86,7 @@ The HTML fallback uses the same endpoint:
 <form action="https://formspree.io/f/xeeydyyl" method="POST" enctype="multipart/form-data">
 ```
 
-The UI submits `multipart/form-data` with `fetch()` so evidence files can be uploaded. Formspree stores the submission and sends notification emails.
+The UI submits `multipart/form-data` with `fetch()` so evidence files can be uploaded. Formspree stores the submission and sends notification emails. After Formspree returns a successful response, the page opens `/dep-support/success/` in a new window with the Kit ID summary.
 
 Recommended Formspree configuration:
 

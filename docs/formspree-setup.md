@@ -109,3 +109,9 @@ For production, submit a test report with a photo and confirm:
 - Mariano receives a copy
 - the file appears in the Formspree submission
 - the Kit ID is included in the notification
+
+Endpoint smoke test:
+
+```text
+2026-07-30: https://formspree.io/f/xeeydyyl returned {"ok":true} for a test submission marked "TEST - Codex integration check".
+```

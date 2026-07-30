@@ -85,7 +85,7 @@
             >
             <button class="secondary-button" type="button" id="apply-kit-id" data-i18n="useKitId">Use Kit ID</button>
           </div>
-          <p class="field-help" id="manual-kit-help">
+          <p class="field-help" id="manual-kit-help" data-i18n="manualKitHelp">
             Format: SR-YYMM-A-000001 for Robotics or SP-YYMM-A-000001 for Physical Computing.
           </p>
         </div>
@@ -193,15 +193,6 @@
                 <label for="issue-category" data-i18n="issueCategory">Issue Category</label>
                 <select id="issue-category" name="issue_category" required>
                   <option value="">Select an issue category</option>
-                  <option>Missing component</option>
-                  <option>Damaged component</option>
-                  <option>Component not working</option>
-                  <option>Connection problem</option>
-                  <option>Programming or firmware issue</option>
-                  <option>Power problem</option>
-                  <option>Incorrect component</option>
-                  <option>Documentation question</option>
-                  <option>Other</option>
                 </select>
               </div>
             </div>
@@ -230,6 +221,7 @@
                 maxlength="1200"
                 rows="4"
                 placeholder="For example: checked the cables, restarted the board, tried another port, or tested the component in another kit."
+                data-i18n-placeholder="troubleshootingPlaceholder"
               ></textarea>
             </div>
 
@@ -253,23 +245,15 @@
           </button>
         </form>
 
-        <div class="success-card" id="success-state" hidden>
-          <p class="eyebrow" data-i18n="requestSubmitted">Request submitted</p>
-          <h2 data-i18n="successTitle">Thank you. Your support request has been submitted successfully.</h2>
-          <p id="success-kit-id">Kit ID:</p>
-          <p id="ticket-reference" hidden></p>
-          <p data-i18n="successHint">Please keep this reference for future communication with support.</p>
-          <button class="secondary-button" type="button" id="submit-another" data-i18n="submitAnother">Submit another report</button>
-        </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>FIFA Foundation &amp; Raco Systems Corp. support service.</p>
+      <p data-i18n="footerService">FIFA Foundation &amp; Raco Systems Corp. support service.</p>
       <p>
-        <a href="mailto:support@smartteamdigital.com">Contact</a>
+        <a href="mailto:support@smartteamdigital.com" data-i18n="contact">Contact</a>
         <span aria-hidden="true">/</span>
-        <a href="https://smartteamdigital.com/" target="_blank" rel="noopener">Privacy</a>
+        <a href="https://smartteamdigital.com/" target="_blank" rel="noopener" data-i18n="privacy">Privacy</a>
       </p>
     </footer>
 

@@ -27,13 +27,19 @@ const COMPONENT_IMAGES = {
   "Power Adapter / Charger": "power-adapter.png",
   "Soil Moisture Sensor": "soil-moisture-sensor.png",
   "Ultrasonic Distance Sensor": "ultrasonic-distance-sensor.png",
-  Wheel: "wheel.png",
+  Wheels: "wheel.png",
   "Accessory & Screw Set": "accessory-screw-set.png",
   "Jumper Wires (Female-to-Female)": "jumper-female-female.png",
   "Micro:bit Expansion Shield": "microbit-expansion-shield.png",
+  Screw: "screw.png",
   "180° Servomotor": "180-servomotor.png",
   "RGB LED Strip": "rgb-led-strip.png",
+  "Micro:bit": "microbit.png",
   "Plastic Ball": "plastic-ball.png",
+  "Micro USB Cable": "micro-usb-cable.png",
+  Batteries: "batteries.png",
+  "Battery Holder": "battery-holder.png",
+  Wearable: "wearable.png",
   "Alligator Clip Wires": "alligator-clip-wires.png",
   "Jumper Wires (Male-to-Male)": "jumper-male-male.png",
   "Jumper Wires (Male-to-Female)": "jumper-male-female.png",
@@ -54,21 +60,25 @@ const COMPONENTS_BY_KIT_TYPE = {
     "Power Adapter / Charger",
     "Soil Moisture Sensor",
     "Ultrasonic Distance Sensor",
-    "Wheel",
+    "Wheels",
+    "Screw",
     "Accessory & Screw Set",
     "Jumper Wires (Female-to-Female)",
     "Micro:bit Expansion Shield",
-    "Storage Box",
     "Other",
   ],
   "Physical Computing Kit": [
     "180° Servomotor",
     "RGB LED Strip",
+    "Micro:bit",
     "Plastic Ball",
+    "Micro USB Cable",
+    "Batteries",
+    "Battery Holder",
+    "Wearable",
     "Alligator Clip Wires",
     "Jumper Wires (Male-to-Male)",
     "Jumper Wires (Male-to-Female)",
-    "Storage Box",
     "Other",
   ],
   fallback: [
@@ -78,9 +88,157 @@ const COMPONENTS_BY_KIT_TYPE = {
     "Actuator",
     "Cable",
     "Power Supply",
-    "Storage Box",
     "Other",
   ],
+};
+
+const ISSUE_CATEGORIES = [
+  "Missing component",
+  "Damaged component",
+  "Component not working",
+  "Connection problem",
+  "Programming or firmware issue",
+  "Power problem",
+  "Incorrect component",
+  "Documentation question",
+  "Other",
+];
+
+const COMPONENT_LABELS = {
+  en: {},
+  fr: {
+    "Continuous Rotation Servo": "Servomoteur a rotation continue",
+    "Caster Wheel": "Roue folle",
+    "Color Sensor Module": "Module capteur de couleur",
+    "DC Encoder Motor": "Moteur CC avec encodeur",
+    "Joystick Module": "Module joystick",
+    "LCD Module": "Module LCD",
+    "Line Tracking Sensor": "Capteur suiveur de ligne",
+    "Mechanical Chassis Kit": "Kit chassis mecanique",
+    Tool: "Outil",
+    "Potentiometer Module": "Module potentiometre",
+    "Power Adapter / Charger": "Adaptateur secteur / chargeur",
+    "Soil Moisture Sensor": "Capteur d'humidite du sol",
+    "Ultrasonic Distance Sensor": "Capteur de distance ultrasonique",
+    Wheels: "Roues",
+    Screw: "Vis",
+    "Accessory & Screw Set": "Jeu d'accessoires et de vis",
+    "Jumper Wires (Female-to-Female)": "Fils jumper femelle-femelle",
+    "Micro:bit Expansion Shield": "Carte d'extension micro:bit",
+    "180° Servomotor": "Servomoteur 180°",
+    "RGB LED Strip": "Ruban LED RVB",
+    "Micro:bit": "Micro:bit",
+    "Plastic Ball": "Ballon en plastique",
+    "Micro USB Cable": "Cable Micro USB",
+    Batteries: "Piles",
+    "Battery Holder": "Support de piles",
+    Wearable: "Support portable",
+    "Alligator Clip Wires": "Cables a pinces crocodile",
+    "Jumper Wires (Male-to-Male)": "Fils jumper male-male",
+    "Jumper Wires (Male-to-Female)": "Fils jumper male-femelle",
+    Other: "Autre",
+  },
+  es: {
+    "Continuous Rotation Servo": "Servo de rotacion continua",
+    "Caster Wheel": "Rueda loca",
+    "Color Sensor Module": "Modulo sensor de color",
+    "DC Encoder Motor": "Motor DC con encoder",
+    "Joystick Module": "Modulo joystick",
+    "LCD Module": "Modulo LCD",
+    "Line Tracking Sensor": "Sensor seguidor de linea",
+    "Mechanical Chassis Kit": "Kit de chasis mecanico",
+    Tool: "Herramienta",
+    "Potentiometer Module": "Modulo potenciometro",
+    "Power Adapter / Charger": "Adaptador / cargador",
+    "Soil Moisture Sensor": "Sensor de humedad del suelo",
+    "Ultrasonic Distance Sensor": "Sensor ultrasonico de distancia",
+    Wheels: "Ruedas",
+    Screw: "Tornillos",
+    "Accessory & Screw Set": "Set de accesorios y tornillos",
+    "Jumper Wires (Female-to-Female)": "Cables jumper hembra-hembra",
+    "Micro:bit Expansion Shield": "Shield de expansion micro:bit",
+    "180° Servomotor": "Servomotor 180°",
+    "RGB LED Strip": "Tira LED RGB",
+    "Micro:bit": "Micro:bit",
+    "Plastic Ball": "Pelota plastica",
+    "Micro USB Cable": "Cable Micro USB",
+    Batteries: "Baterias",
+    "Battery Holder": "Portabaterias",
+    Wearable: "Soporte wearable",
+    "Alligator Clip Wires": "Cables cocodrilo",
+    "Jumper Wires (Male-to-Male)": "Cables jumper macho-macho",
+    "Jumper Wires (Male-to-Female)": "Cables jumper macho-hembra",
+    Other: "Otro",
+  },
+  pt: {
+    "Continuous Rotation Servo": "Servo de rotacao continua",
+    "Caster Wheel": "Roda boba",
+    "Color Sensor Module": "Modulo sensor de cor",
+    "DC Encoder Motor": "Motor DC com encoder",
+    "Joystick Module": "Modulo joystick",
+    "LCD Module": "Modulo LCD",
+    "Line Tracking Sensor": "Sensor seguidor de linha",
+    "Mechanical Chassis Kit": "Kit de chassi mecanico",
+    Tool: "Ferramenta",
+    "Potentiometer Module": "Modulo potenciometro",
+    "Power Adapter / Charger": "Adaptador / carregador",
+    "Soil Moisture Sensor": "Sensor de umidade do solo",
+    "Ultrasonic Distance Sensor": "Sensor ultrassonico de distancia",
+    Wheels: "Rodas",
+    Screw: "Parafusos",
+    "Accessory & Screw Set": "Conjunto de acessorios e parafusos",
+    "Jumper Wires (Female-to-Female)": "Cabos jumper femea-femea",
+    "Micro:bit Expansion Shield": "Shield de expansao micro:bit",
+    "180° Servomotor": "Servomotor 180°",
+    "RGB LED Strip": "Fita LED RGB",
+    "Micro:bit": "Micro:bit",
+    "Plastic Ball": "Bola plastica",
+    "Micro USB Cable": "Cabo Micro USB",
+    Batteries: "Baterias",
+    "Battery Holder": "Suporte de baterias",
+    Wearable: "Suporte vestivel",
+    "Alligator Clip Wires": "Cabos jacare",
+    "Jumper Wires (Male-to-Male)": "Cabos jumper macho-macho",
+    "Jumper Wires (Male-to-Female)": "Cabos jumper macho-femea",
+    Other: "Outro",
+  },
+};
+
+const ISSUE_CATEGORY_LABELS = {
+  en: {},
+  fr: {
+    "Missing component": "Composant manquant",
+    "Damaged component": "Composant endommage",
+    "Component not working": "Composant ne fonctionne pas",
+    "Connection problem": "Probleme de connexion",
+    "Programming or firmware issue": "Probleme de programmation ou firmware",
+    "Power problem": "Probleme d'alimentation",
+    "Incorrect component": "Composant incorrect",
+    "Documentation question": "Question sur la documentation",
+    Other: "Autre",
+  },
+  es: {
+    "Missing component": "Componente faltante",
+    "Damaged component": "Componente danado",
+    "Component not working": "Componente no funciona",
+    "Connection problem": "Problema de conexion",
+    "Programming or firmware issue": "Problema de programacion o firmware",
+    "Power problem": "Problema de energia",
+    "Incorrect component": "Componente incorrecto",
+    "Documentation question": "Consulta sobre documentacion",
+    Other: "Otro",
+  },
+  pt: {
+    "Missing component": "Componente faltando",
+    "Damaged component": "Componente danificado",
+    "Component not working": "Componente nao funciona",
+    "Connection problem": "Problema de conexao",
+    "Programming or firmware issue": "Problema de programacao ou firmware",
+    "Power problem": "Problema de energia",
+    "Incorrect component": "Componente incorreto",
+    "Documentation question": "Pergunta sobre documentacao",
+    Other: "Outro",
+  },
 };
 
 const state = {
@@ -96,6 +254,7 @@ const elements = {};
 const TRANSLATIONS = {
   en: {
     skipLink: "Skip to support form",
+    pageTitle: "Digital Education Programme support",
     projectLabel: "Programme support",
     languageLabel: "Language",
     heroTitle: "Digital Education Programme support",
@@ -110,6 +269,7 @@ const TRANSLATIONS = {
     notDetected: "Not detected",
     pendingIdentification: "Pending identification",
     manualKitLabel: "Kit ID printed next to the QR code",
+    manualKitHelp: "Format: SR-YYMM-A-000001 for Robotics or SP-YYMM-A-000001 for Physical Computing.",
     useKitId: "Use Kit ID",
     reportIssue: "Report a Kit Issue",
     reportIssueHint: "Send a support request with the Kit ID included automatically.",
@@ -131,9 +291,11 @@ const TRANSLATIONS = {
     componentHelp: "Tap the component that has the problem.",
     otherComponent: "If Other, which component?",
     issueCategory: "Issue Category",
+    selectIssueCategory: "Select an issue category",
     description: "Problem Description",
     descriptionHelp: "Please describe what happened, what you expected, and any troubleshooting steps already attempted.",
     troubleshooting: "Previous Troubleshooting",
+    troubleshootingPlaceholder: "For example: checked the cables, restarted the board, tried another port, or tested the component in another kit.",
     evidence: "Attach photos or a short video",
     evidenceHelp: "Please avoid including personal information about students. Maximum file size: 15 MB.",
     consent: "I confirm that the information provided is accurate and may be used to process this support request.",
@@ -154,11 +316,19 @@ const TRANSLATIONS = {
     submitting: "Submitting your support request...",
     submitError: "We could not submit your request. Please check your connection and try again.",
     successStatus: "Thank you. Your support request has been submitted successfully.",
+    confirmationOpened: "Your request was submitted. The confirmation opened in a new window.",
+    confirmationBlocked: "Your request was submitted. Open the confirmation window.",
     kitIdPrefix: "Kit ID:",
     ticketPrefix: "Support Request:",
     submittingButton: "Submitting...",
+    footerService: "FIFA Foundation & Raco Systems Corp. support service.",
+    contact: "Contact",
+    privacy: "Privacy",
   },
   fr: {
+    skipLink: "Aller au formulaire de support",
+    pageTitle: "Support du Programme d'education numerique",
+    projectLabel: "Support du programme",
     languageLabel: "Langue",
     heroTitle: "Assistance au Programme d'education numerique",
     heroIntro: "Utilisez cette page pour signaler un probleme avec votre kit ou demander une assistance technique.",
@@ -167,9 +337,18 @@ const TRANSLATIONS = {
     kitRequired: "Identification du kit requise",
     kitDetected: "Votre Kit ID a ete detecte et sera inclus automatiquement.",
     kitMissing: "Nous n'avons pas pu identifier votre kit automatiquement. Saisissez le Kit ID imprime pres du QR code.",
+    kitId: "Kit ID",
+    kitType: "Type de kit",
+    notDetected: "Non detecte",
+    pendingIdentification: "Identification en attente",
+    manualKitLabel: "Kit ID imprime pres du QR code",
+    manualKitHelp: "Format : SR-YYMM-A-000001 pour Robotique ou SP-YYMM-A-000001 pour Informatique physique.",
+    useKitId: "Utiliser le Kit ID",
     reportIssue: "Signaler un probleme de kit",
+    reportIssueHint: "Envoyez une demande avec le Kit ID inclus automatiquement.",
     resources: "Guides et ressources",
     resourcesHint: "Explorez les guides des modules et les premiers controles.",
+    supportRequest: "Demande de support",
     formIntro: "Completez le formulaire ci-dessous. Votre Kit ID est inclus automatiquement pour aider l'equipe support.",
     contactInfo: "Coordonnees",
     institution: "Ecole ou institution",
@@ -185,12 +364,44 @@ const TRANSLATIONS = {
     componentHelp: "Touchez le composant qui pose probleme.",
     otherComponent: "Si Autre, quel composant ?",
     issueCategory: "Categorie du probleme",
+    selectIssueCategory: "Selectionnez une categorie",
     description: "Description du probleme",
+    descriptionHelp: "Decrivez ce qui s'est passe, ce que vous attendiez et les controles deja effectues.",
     troubleshooting: "Depannage deja essaye",
+    troubleshootingPlaceholder: "Par exemple : cables verifies, carte redemarree, autre port essaye ou composant teste dans un autre kit.",
+    evidence: "Joindre des photos ou une courte video",
+    evidenceHelp: "Evitez les informations personnelles sur les eleves. Taille maximale : 15 MB.",
+    consent: "Je confirme que les informations fournies sont exactes et peuvent etre utilisees pour traiter cette demande.",
     submit: "Envoyer la demande",
+    requestSubmitted: "Demande envoyee",
     successTitle: "Merci. Votre demande d'assistance a ete envoyee avec succes.",
+    successHint: "Conservez cette reference pour toute communication avec le support.",
+    submitAnother: "Envoyer un autre rapport",
+    invalidUrl: "Le Kit ID dans l'URL est invalide. Verifiez le code imprime pres du QR.",
+    enterValidKit: "Saisissez un Kit ID valide avant d'envoyer la demande.",
+    validKitRequired: "Un Kit ID valide est requis avant l'envoi.",
+    spamError: "Nous n'avons pas pu envoyer la demande. Reessayez.",
+    requiredFields: "Completez tous les champs obligatoires avant l'envoi.",
+    invalidEmail: "Saisissez une adresse e-mail valide.",
+    shortDescription: "Ajoutez un peu plus de detail dans la description.",
+    fileTooLarge: "Le fichier est trop volumineux. Chargez un fichier de moins de 15 MB.",
+    endpointMissing: "L'endpoint Formspree n'est pas encore configure.",
+    submitting: "Envoi de votre demande...",
+    submitError: "Nous n'avons pas pu envoyer la demande. Verifiez la connexion et reessayez.",
+    successStatus: "Merci. Votre demande d'assistance a ete envoyee avec succes.",
+    confirmationOpened: "Votre demande a ete envoyee. La confirmation s'est ouverte dans une nouvelle fenetre.",
+    confirmationBlocked: "Votre demande a ete envoyee. Ouvrir la fenetre de confirmation.",
+    kitIdPrefix: "Kit ID :",
+    ticketPrefix: "Demande de support :",
+    submittingButton: "Envoi...",
+    footerService: "Service de support FIFA Foundation & Raco Systems Corp.",
+    contact: "Contact",
+    privacy: "Confidentialite",
   },
   es: {
+    skipLink: "Saltar al formulario de soporte",
+    pageTitle: "Soporte del Programa de Educacion Digital",
+    projectLabel: "Soporte del programa",
     languageLabel: "Idioma",
     heroTitle: "Soporte del Programa de Educacion Digital",
     heroIntro: "Use esta pagina para reportar un problema con su kit o solicitar asistencia tecnica.",
@@ -199,9 +410,18 @@ const TRANSLATIONS = {
     kitRequired: "Se requiere identificar el kit",
     kitDetected: "Su Kit ID fue detectado y se incluira automaticamente.",
     kitMissing: "No pudimos identificar el kit automaticamente. Ingrese el Kit ID impreso junto al codigo QR.",
+    kitId: "Kit ID",
+    kitType: "Tipo de kit",
+    notDetected: "No detectado",
+    pendingIdentification: "Identificacion pendiente",
+    manualKitLabel: "Kit ID impreso junto al codigo QR",
+    manualKitHelp: "Formato: SR-YYMM-A-000001 para Robotica o SP-YYMM-A-000001 para Computacion Fisica.",
+    useKitId: "Usar Kit ID",
     reportIssue: "Reportar un problema del kit",
+    reportIssueHint: "Enviar una solicitud con el Kit ID incluido automaticamente.",
     resources: "Guias y recursos",
     resourcesHint: "Explore las guias de modulos y las primeras verificaciones.",
+    supportRequest: "Solicitud de soporte",
     formIntro: "Complete el formulario. El Kit ID se incluye automaticamente para que soporte identifique el producto.",
     contactInfo: "Datos de contacto",
     institution: "Escuela o institucion",
@@ -217,12 +437,44 @@ const TRANSLATIONS = {
     componentHelp: "Toque el componente que tiene el problema.",
     otherComponent: "Si es Otro, cual?",
     issueCategory: "Categoria del problema",
+    selectIssueCategory: "Seleccione una categoria",
     description: "Descripcion del problema",
+    descriptionHelp: "Describa que ocurrio, que esperaba y que pruebas ya realizo.",
     troubleshooting: "Pruebas realizadas",
+    troubleshootingPlaceholder: "Por ejemplo: revise cables, reinicie la placa, probe otro puerto o testee el componente en otro kit.",
+    evidence: "Adjuntar fotos o video corto",
+    evidenceHelp: "Evite incluir informacion personal de estudiantes. Tamano maximo: 15 MB.",
+    consent: "Confirmo que la informacion enviada es correcta y puede usarse para procesar esta solicitud.",
     submit: "Enviar solicitud",
+    requestSubmitted: "Solicitud enviada",
     successTitle: "Gracias. Su solicitud de soporte fue enviada correctamente.",
+    successHint: "Conserve esta referencia para futuras comunicaciones con soporte.",
+    submitAnother: "Enviar otro reporte",
+    invalidUrl: "El Kit ID de la URL no es valido. Revise el codigo impreso junto al QR.",
+    enterValidKit: "Ingrese un Kit ID valido antes de enviar la solicitud.",
+    validKitRequired: "Se requiere un Kit ID valido antes de enviar el reporte.",
+    spamError: "No pudimos enviar la solicitud. Intente nuevamente.",
+    requiredFields: "Complete todos los campos obligatorios antes de enviar.",
+    invalidEmail: "Ingrese un correo electronico valido.",
+    shortDescription: "Agregue un poco mas de detalle en la descripcion.",
+    fileTooLarge: "El archivo es demasiado grande. Suba un archivo menor a 15 MB.",
+    endpointMissing: "El endpoint de Formspree todavia no esta configurado.",
+    submitting: "Enviando la solicitud...",
+    submitError: "No pudimos enviar la solicitud. Revise la conexion e intente nuevamente.",
+    successStatus: "Gracias. Su solicitud de soporte fue enviada correctamente.",
+    confirmationOpened: "La solicitud fue enviada. La confirmacion se abrio en una nueva ventana.",
+    confirmationBlocked: "La solicitud fue enviada. Abra la ventana de confirmacion.",
+    kitIdPrefix: "Kit ID:",
+    ticketPrefix: "Solicitud de soporte:",
+    submittingButton: "Enviando...",
+    footerService: "Servicio de soporte de FIFA Foundation & Raco Systems Corp.",
+    contact: "Contacto",
+    privacy: "Privacidad",
   },
   pt: {
+    skipLink: "Ir para o formulario de suporte",
+    pageTitle: "Suporte do Programa de Educacao Digital",
+    projectLabel: "Suporte do programa",
     languageLabel: "Idioma",
     heroTitle: "Suporte do Programa de Educacao Digital",
     heroIntro: "Use esta pagina para relatar um problema com seu kit ou solicitar assistencia tecnica.",
@@ -231,9 +483,18 @@ const TRANSLATIONS = {
     kitRequired: "Identificacao do kit obrigatoria",
     kitDetected: "Seu Kit ID foi detectado e sera incluido automaticamente.",
     kitMissing: "Nao foi possivel identificar o kit automaticamente. Digite o Kit ID impresso ao lado do QR code.",
+    kitId: "Kit ID",
+    kitType: "Tipo de kit",
+    notDetected: "Nao detectado",
+    pendingIdentification: "Identificacao pendente",
+    manualKitLabel: "Kit ID impresso ao lado do QR code",
+    manualKitHelp: "Formato: SR-YYMM-A-000001 para Robotica ou SP-YYMM-A-000001 para Computacao Fisica.",
+    useKitId: "Usar Kit ID",
     reportIssue: "Relatar problema do kit",
+    reportIssueHint: "Enviar uma solicitacao com o Kit ID incluido automaticamente.",
     resources: "Guias e recursos",
     resourcesHint: "Explore os guias dos modulos e as primeiras verificacoes.",
+    supportRequest: "Solicitacao de suporte",
     formIntro: "Preencha o formulario. O Kit ID sera incluido automaticamente para ajudar o suporte.",
     contactInfo: "Informacoes de contato",
     institution: "Escola ou instituicao",
@@ -249,10 +510,39 @@ const TRANSLATIONS = {
     componentHelp: "Toque o componente com o problema.",
     otherComponent: "Se Outro, qual componente?",
     issueCategory: "Categoria do problema",
+    selectIssueCategory: "Selecione uma categoria",
     description: "Descricao do problema",
+    descriptionHelp: "Descreva o que aconteceu, o que esperava e quais testes ja realizou.",
     troubleshooting: "Testes realizados",
+    troubleshootingPlaceholder: "Por exemplo: verificou cabos, reiniciou a placa, testou outra porta ou testou o componente em outro kit.",
+    evidence: "Anexar fotos ou video curto",
+    evidenceHelp: "Evite incluir informacoes pessoais de estudantes. Tamanho maximo: 15 MB.",
+    consent: "Confirmo que as informacoes enviadas sao corretas e podem ser usadas para processar esta solicitacao.",
     submit: "Enviar solicitacao",
+    requestSubmitted: "Solicitacao enviada",
     successTitle: "Obrigado. Sua solicitacao de suporte foi enviada com sucesso.",
+    successHint: "Guarde esta referencia para comunicacoes futuras com o suporte.",
+    submitAnother: "Enviar outro relatorio",
+    invalidUrl: "O Kit ID na URL e invalido. Verifique o codigo impresso ao lado do QR.",
+    enterValidKit: "Digite um Kit ID valido antes de enviar a solicitacao.",
+    validKitRequired: "Um Kit ID valido e obrigatorio antes do envio.",
+    spamError: "Nao foi possivel enviar a solicitacao. Tente novamente.",
+    requiredFields: "Preencha todos os campos obrigatorios antes de enviar.",
+    invalidEmail: "Digite um e-mail valido.",
+    shortDescription: "Adicione um pouco mais de detalhe na descricao.",
+    fileTooLarge: "O arquivo e muito grande. Envie um arquivo menor que 15 MB.",
+    endpointMissing: "O endpoint do Formspree ainda nao foi configurado.",
+    submitting: "Enviando sua solicitacao...",
+    submitError: "Nao foi possivel enviar a solicitacao. Verifique a conexao e tente novamente.",
+    successStatus: "Obrigado. Sua solicitacao de suporte foi enviada com sucesso.",
+    confirmationOpened: "A solicitacao foi enviada. A confirmacao abriu em uma nova janela.",
+    confirmationBlocked: "A solicitacao foi enviada. Abra a janela de confirmacao.",
+    kitIdPrefix: "Kit ID:",
+    ticketPrefix: "Solicitacao de suporte:",
+    submittingButton: "Enviando...",
+    footerService: "Servico de suporte FIFA Foundation & Raco Systems Corp.",
+    contact: "Contato",
+    privacy: "Privacidade",
   },
 };
 
@@ -281,8 +571,6 @@ function init() {
 
   elements.componentSelect.addEventListener("change", handleComponentChange);
   elements.form.addEventListener("submit", handleSubmit);
-  elements.submitAnotherButton.addEventListener("click", resetForAnotherReport);
-
   elements.form.addEventListener("input", () => {
     clearStatus();
     updateSubmitAvailability();
@@ -321,10 +609,6 @@ function cacheElements() {
   elements.otherComponentInput = document.getElementById("other-component");
   elements.evidenceInput = document.getElementById("evidence");
   elements.submitButton = document.getElementById("submit-button");
-  elements.successState = document.getElementById("success-state");
-  elements.successKitId = document.getElementById("success-kit-id");
-  elements.ticketReference = document.getElementById("ticket-reference");
-  elements.submitAnotherButton = document.getElementById("submit-another");
 }
 
 function configureResourcesAction() {
@@ -352,12 +636,18 @@ function setLanguage(language) {
   state.language = TRANSLATIONS[language] ? language : DEFAULT_LANGUAGE;
   elements.languageSelect.value = state.language;
   document.documentElement.lang = state.language;
+  document.title = t("pageTitle");
   window.localStorage.setItem("supportLanguage", state.language);
 
   document.querySelectorAll("[data-i18n]").forEach((node) => {
     node.textContent = t(node.dataset.i18n);
   });
 
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((node) => {
+    node.placeholder = t(node.dataset.i18nPlaceholder);
+  });
+
+  populateIssueCategories();
   populateComponents(state.kitType || "fallback");
   refreshKitCopy();
   updateSubmitText();
@@ -419,7 +709,7 @@ function populateComponents(kitType) {
 
   elements.componentSelect.textContent = "";
   appendOption(elements.componentSelect, "", t("selectComponent"));
-  options.forEach((component) => appendOption(elements.componentSelect, component, component));
+  options.forEach((component) => appendOption(elements.componentSelect, component, labelComponent(component)));
 
   const selectedValue = options.includes(currentValue) ? currentValue : "";
   elements.componentSelect.value = selectedValue;
@@ -455,13 +745,13 @@ function renderComponentPicker(options, selectedValue) {
         placeholder.classList.add("is-other");
       }
       placeholder.setAttribute("aria-hidden", "true");
-      placeholder.textContent = component === "Other" ? "?" : component.slice(0, 1).toUpperCase();
+      placeholder.textContent = component === "Other" ? "?" : labelComponent(component).slice(0, 1).toUpperCase();
       button.appendChild(placeholder);
     }
 
     const label = document.createElement("span");
     label.className = "component-option-label";
-    label.textContent = component;
+    label.textContent = labelComponent(component);
     button.appendChild(label);
 
     button.addEventListener("click", () => selectComponent(component));
@@ -499,6 +789,24 @@ function appendOption(select, value, label) {
   select.appendChild(option);
 }
 
+function populateIssueCategories() {
+  const currentValue = elements.issueCategorySelect.value;
+  elements.issueCategorySelect.textContent = "";
+  appendOption(elements.issueCategorySelect, "", t("selectIssueCategory"));
+  ISSUE_CATEGORIES.forEach((category) => {
+    appendOption(elements.issueCategorySelect, category, labelIssueCategory(category));
+  });
+  elements.issueCategorySelect.value = ISSUE_CATEGORIES.includes(currentValue) ? currentValue : "";
+}
+
+function labelComponent(component) {
+  return COMPONENT_LABELS[state.language]?.[component] || component;
+}
+
+function labelIssueCategory(category) {
+  return ISSUE_CATEGORY_LABELS[state.language]?.[category] || category;
+}
+
 function handleComponentChange() {
   const requiresOther = elements.componentSelect.value === "Other";
   elements.otherComponentField.hidden = !requiresOther;
@@ -533,6 +841,7 @@ async function handleSubmit(event) {
   elements.submitButton.disabled = true;
   elements.submitButton.textContent = t("submittingButton");
   setStatus(t("submitting"), "info");
+  const confirmationWindow = window.open("success/?pending=1", "_blank");
 
   try {
     const payload = createSubmissionFormData();
@@ -548,8 +857,11 @@ async function handleSubmit(event) {
     }
 
     const result = await parseJsonSafely(response);
-    showSuccess(result);
+    showSuccess(result, confirmationWindow);
   } catch (error) {
+    if (confirmationWindow && !confirmationWindow.closed) {
+      confirmationWindow.close();
+    }
     setStatus(error.message || t("submitError"), "error");
     state.isSubmitting = false;
     elements.submitButton.textContent = t("submit");
@@ -696,35 +1008,42 @@ async function parseFormspreeError(response) {
     .join(" ");
 }
 
-function showSuccess(result = {}) {
+function showSuccess(result = {}, confirmationWindow = null) {
   state.isSubmitting = false;
-  elements.form.hidden = true;
-  elements.successState.hidden = false;
-  elements.successKitId.textContent = `${t("kitIdPrefix")} ${state.kitId}`;
-
   const ticketNumber = result.ticket_number || result.ticketNumber || result.reference;
-  if (ticketNumber) {
-    elements.ticketReference.hidden = false;
-    elements.ticketReference.textContent = `${t("ticketPrefix")} ${ticketNumber}`;
+  const confirmationUrl = buildSuccessUrl(ticketNumber);
+
+  if (confirmationWindow && !confirmationWindow.closed) {
+    confirmationWindow.location.replace(confirmationUrl);
+    setStatus(t("confirmationOpened"), "success");
   } else {
-    elements.ticketReference.hidden = true;
-    elements.ticketReference.textContent = "";
+    setConfirmationFallback(confirmationUrl);
   }
 
-  setStatus(t("successStatus"), "success");
+  elements.submitButton.textContent = t("submit");
+  elements.submitButton.disabled = true;
 }
 
-function resetForAnotherReport() {
-  elements.form.reset();
-  elements.form.hidden = false;
-  elements.successState.hidden = true;
-  elements.ticketReference.hidden = true;
-  elements.pageUrlInput.value = window.location.href;
-  elements.countryInput.value = "Bhutan";
-  updateSubmitText();
-  populateComponents(state.kitType || "fallback");
-  clearStatus();
-  updateSubmitAvailability();
+function buildSuccessUrl(ticketNumber = "") {
+  const params = new URLSearchParams({
+    id: state.kitId,
+    type: state.kitType,
+    lang: state.language,
+  });
+  if (ticketNumber) params.set("ref", ticketNumber);
+  return `success/?${params.toString()}`;
+}
+
+function setConfirmationFallback(url) {
+  elements.formStatus.textContent = "";
+  elements.formStatus.className = "status-message is-success";
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.target = "_blank";
+  link.rel = "noopener";
+  link.textContent = t("confirmationBlocked");
+  elements.formStatus.appendChild(link);
 }
 
 function updateSubmitText() {
