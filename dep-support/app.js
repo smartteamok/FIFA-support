@@ -2,7 +2,6 @@
 
 const SUPPORT_FORM_ENDPOINT = "https://formspree.io/f/xeeydyyl";
 const RESOURCES_URL = "";
-const MAX_FILE_SIZE_BYTES = 15 * 1024 * 1024;
 const KIT_ID_PATTERN = /^(SR|SP)-\d{4}-[A-Z]-\d{6}$/;
 const DEFAULT_LANGUAGE = "en";
 
@@ -293,9 +292,10 @@ const TRANSLATIONS = {
     issueCategory: "Issue Category",
     selectIssueCategory: "Select an issue category",
     description: "Problem Description",
-    descriptionHelp: "Please describe what happened, what you expected, and any troubleshooting steps already attempted.",
+    descriptionHelp: "Optional. Add any details that may help support understand the issue.",
     troubleshooting: "Previous Troubleshooting",
     troubleshootingPlaceholder: "For example: checked the cables, restarted the board, tried another port, or tested the component in another kit.",
+    attachmentNote: "If possible, describe the issue. Photos may be requested by support later.",
     evidence: "Attach photos or a short video",
     evidenceHelp: "Please avoid including personal information about students. Maximum file size: 15 MB.",
     consent: "I confirm that the information provided is accurate and may be used to process this support request.",
@@ -310,8 +310,6 @@ const TRANSLATIONS = {
     spamError: "We could not submit your request. Please try again.",
     requiredFields: "Please complete all required fields before submitting.",
     invalidEmail: "Please enter a valid email address.",
-    shortDescription: "Please add a little more detail to the problem description.",
-    fileTooLarge: "The attached file is too large. Please upload a file smaller than 15 MB.",
     endpointMissing: "The Formspree endpoint has not been configured yet. Update SUPPORT_FORM_ENDPOINT in app.js before publishing.",
     submitting: "Submitting your support request...",
     submitError: "We could not submit your request. Please check your connection and try again.",
@@ -366,9 +364,10 @@ const TRANSLATIONS = {
     issueCategory: "Categorie du probleme",
     selectIssueCategory: "Selectionnez une categorie",
     description: "Description du probleme",
-    descriptionHelp: "Decrivez ce qui s'est passe, ce que vous attendiez et les controles deja effectues.",
+    descriptionHelp: "Facultatif. Ajoutez les details utiles pour aider le support a comprendre le probleme.",
     troubleshooting: "Depannage deja essaye",
     troubleshootingPlaceholder: "Par exemple : cables verifies, carte redemarree, autre port essaye ou composant teste dans un autre kit.",
+    attachmentNote: "Si possible, decrivez le probleme. Des photos pourront etre demandees plus tard par le support.",
     evidence: "Joindre des photos ou une courte video",
     evidenceHelp: "Evitez les informations personnelles sur les eleves. Taille maximale : 15 MB.",
     consent: "Je confirme que les informations fournies sont exactes et peuvent etre utilisees pour traiter cette demande.",
@@ -383,8 +382,6 @@ const TRANSLATIONS = {
     spamError: "Nous n'avons pas pu envoyer la demande. Reessayez.",
     requiredFields: "Completez tous les champs obligatoires avant l'envoi.",
     invalidEmail: "Saisissez une adresse e-mail valide.",
-    shortDescription: "Ajoutez un peu plus de detail dans la description.",
-    fileTooLarge: "Le fichier est trop volumineux. Chargez un fichier de moins de 15 MB.",
     endpointMissing: "L'endpoint Formspree n'est pas encore configure.",
     submitting: "Envoi de votre demande...",
     submitError: "Nous n'avons pas pu envoyer la demande. Verifiez la connexion et reessayez.",
@@ -439,9 +436,10 @@ const TRANSLATIONS = {
     issueCategory: "Categoria del problema",
     selectIssueCategory: "Seleccione una categoria",
     description: "Descripcion del problema",
-    descriptionHelp: "Describa que ocurrio, que esperaba y que pruebas ya realizo.",
+    descriptionHelp: "Opcional. Agregue cualquier detalle que ayude a soporte a entender el problema.",
     troubleshooting: "Pruebas realizadas",
     troubleshootingPlaceholder: "Por ejemplo: revise cables, reinicie la placa, probe otro puerto o testee el componente en otro kit.",
+    attachmentNote: "Si es posible, describa el problema. Soporte podra solicitar fotos mas adelante.",
     evidence: "Adjuntar fotos o video corto",
     evidenceHelp: "Evite incluir informacion personal de estudiantes. Tamano maximo: 15 MB.",
     consent: "Confirmo que la informacion enviada es correcta y puede usarse para procesar esta solicitud.",
@@ -456,8 +454,6 @@ const TRANSLATIONS = {
     spamError: "No pudimos enviar la solicitud. Intente nuevamente.",
     requiredFields: "Complete todos los campos obligatorios antes de enviar.",
     invalidEmail: "Ingrese un correo electronico valido.",
-    shortDescription: "Agregue un poco mas de detalle en la descripcion.",
-    fileTooLarge: "El archivo es demasiado grande. Suba un archivo menor a 15 MB.",
     endpointMissing: "El endpoint de Formspree todavia no esta configurado.",
     submitting: "Enviando la solicitud...",
     submitError: "No pudimos enviar la solicitud. Revise la conexion e intente nuevamente.",
@@ -512,9 +508,10 @@ const TRANSLATIONS = {
     issueCategory: "Categoria do problema",
     selectIssueCategory: "Selecione uma categoria",
     description: "Descricao do problema",
-    descriptionHelp: "Descreva o que aconteceu, o que esperava e quais testes ja realizou.",
+    descriptionHelp: "Opcional. Adicione detalhes que ajudem o suporte a entender o problema.",
     troubleshooting: "Testes realizados",
     troubleshootingPlaceholder: "Por exemplo: verificou cabos, reiniciou a placa, testou outra porta ou testou o componente em outro kit.",
+    attachmentNote: "Se possivel, descreva o problema. Fotos poderao ser solicitadas pelo suporte mais tarde.",
     evidence: "Anexar fotos ou video curto",
     evidenceHelp: "Evite incluir informacoes pessoais de estudantes. Tamanho maximo: 15 MB.",
     consent: "Confirmo que as informacoes enviadas sao corretas e podem ser usadas para processar esta solicitacao.",
@@ -529,8 +526,6 @@ const TRANSLATIONS = {
     spamError: "Nao foi possivel enviar a solicitacao. Tente novamente.",
     requiredFields: "Preencha todos os campos obrigatorios antes de enviar.",
     invalidEmail: "Digite um e-mail valido.",
-    shortDescription: "Adicione um pouco mais de detalhe na descricao.",
-    fileTooLarge: "O arquivo e muito grande. Envie um arquivo menor que 15 MB.",
     endpointMissing: "O endpoint do Formspree ainda nao foi configurado.",
     submitting: "Enviando sua solicitacao...",
     submitError: "Nao foi possivel enviar a solicitacao. Verifique a conexao e tente novamente.",
@@ -607,7 +602,6 @@ function cacheElements() {
   elements.troubleshootingInput = document.getElementById("troubleshooting");
   elements.otherComponentField = document.getElementById("other-component-field");
   elements.otherComponentInput = document.getElementById("other-component");
-  elements.evidenceInput = document.getElementById("evidence");
   elements.submitButton = document.getElementById("submit-button");
 }
 
@@ -906,17 +900,6 @@ function validateForm() {
     return t("invalidEmail");
   }
 
-  if (elements.descriptionInput.value.trim().length < 20) {
-    markInvalid(elements.descriptionInput);
-    return t("shortDescription");
-  }
-
-  const file = elements.evidenceInput.files[0];
-  if (file && file.size > MAX_FILE_SIZE_BYTES) {
-    markInvalid(elements.evidenceInput);
-    return t("fileTooLarge");
-  }
-
   return "";
 }
 
@@ -948,11 +931,6 @@ function createSubmissionFormData() {
   Object.entries(payload).forEach(([key, value]) => {
     formData.append(key, String(value ?? ""));
   });
-
-  const file = elements.evidenceInput.files[0];
-  if (file) {
-    formData.append("evidence", file, file.name);
-  }
 
   return formData;
 }

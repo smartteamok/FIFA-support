@@ -202,10 +202,8 @@
               <textarea
                 id="description"
                 name="description"
-                minlength="20"
                 maxlength="2000"
                 rows="6"
-                required
                 aria-describedby="description-help"
               ></textarea>
               <p class="field-help" id="description-help" data-i18n="descriptionHelp">
@@ -225,14 +223,17 @@
               ></textarea>
             </div>
 
-            <div class="field file-field" id="file-upload-field">
+            <p class="field-help attachment-note" data-i18n="attachmentNote">
+              If possible, describe the issue. Photos may be requested by support later.
+            </p>
+
+            <div class="field file-field" id="file-upload-field" hidden>
               <label for="evidence"><span data-i18n="evidence">Attach photos or a short video</span> <span data-i18n="optional">optional</span></label>
-              <input id="evidence" name="evidence" type="file" accept=".jpg,.jpeg,.png,.pdf,.mp4,.mov">
+              <input id="evidence" name="evidence" type="file" accept=".jpg,.jpeg,.png,.pdf,.mp4,.mov" disabled>
               <p class="field-help" data-i18n="evidenceHelp">
                 Please avoid including personal information about students. Maximum file size: 15 MB.
               </p>
             </div>
-            <!-- TODO: Hide or replace the file input if the selected backend cannot accept uploads. -->
           </fieldset>
 
           <label class="consent">

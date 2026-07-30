@@ -86,15 +86,17 @@ The HTML fallback uses the same endpoint:
 <form action="https://formspree.io/f/xeeydyyl" method="POST" enctype="multipart/form-data">
 ```
 
-The UI submits `multipart/form-data` with `fetch()` so evidence files can be uploaded. Formspree stores the submission and sends notification emails. After Formspree returns a successful response, the page opens `/dep-support/success/` in a new window with the Kit ID summary.
+The UI submits the support request with `fetch()`. Formspree stores the submission and sends notification emails. After Formspree returns a successful response, the page opens `/dep-support/success/` in a new window with the Kit ID summary.
+
+File uploads are hidden and disabled while using the Formspree Free plan. The form shows a note instead: "If possible, describe the issue. Photos may be requested by support later." The disabled `evidence` field remains in the HTML so it can be reactivated later.
 
 Recommended Formspree configuration:
 
 1. Create a form in Formspree.
 2. Set `support@smartteamdigital.com` as the main recipient.
 3. Add `mariano.batistelli@smartteamdigital.com` as an additional notification recipient.
-4. Enable file uploads for the `evidence` field.
-5. Add validation for allowed file types and max size if available in the selected plan.
+4. Keep file uploads disabled on the Free plan.
+5. If the account is upgraded later, re-enable the `evidence` file field and add validation for allowed file types and max size.
 
 See `../docs/formspree-setup.md`.
 
@@ -185,6 +187,5 @@ For WordPress, the simplest deployment options are:
 5. Select `Other` for component and confirm the extra field becomes required.
 6. Try submitting a description shorter than 20 characters and confirm the error message appears.
 7. Try an invalid email and confirm the form blocks submission.
-8. Attach a file larger than 15 MB and confirm the file size error appears.
-9. Leave the endpoint placeholder unchanged and confirm the form warns that the endpoint must be configured.
-10. Configure a test endpoint and confirm the JSON payload includes `kit_id`, `kit_type`, `page_url`, and `submitted_at`.
+8. Leave the endpoint placeholder unchanged and confirm the form warns that the endpoint must be configured.
+9. Configure a test endpoint and confirm the payload includes `kit_id`, `kit_type`, `page_url`, and `submitted_at`.

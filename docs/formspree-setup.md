@@ -59,25 +59,24 @@ If the endpoint changes later, update both `dep-support/app.js` and `dep-support
 
 ## File uploads
 
-The frontend sends `multipart/form-data` and the file field is named:
+File uploads are currently hidden and disabled because Formspree Free does not permit attachments.
+
+```text
+If possible, describe the issue. Photos may be requested by support later.
+```
+
+The HTML keeps a hidden disabled file input named:
 
 ```text
 evidence
 ```
 
-Current frontend limit:
+If the Formspree account is upgraded later, remove `hidden` from `#file-upload-field`, remove `disabled` from `#evidence`, and restore frontend validation before submitting files.
 
-```text
-15 MB
-```
+Recommended future upload rules:
 
-Allowed extensions:
-
-```text
-jpg, jpeg, png, pdf, mp4, mov
-```
-
-In Formspree, enable file uploads and add validation for the `evidence` field if available in the selected plan.
+- Maximum size: 15 MB
+- Allowed extensions: jpg, jpeg, png, pdf, mp4, mov
 
 ## Fields sent
 
@@ -97,17 +96,15 @@ In Formspree, enable file uploads and add validation for the `evidence` field if
 - `submitted_at`
 - `language`
 - `user_agent`
-- `evidence` file, optional
 
 ## Notes
 
 The user email remains the `email` field. Configure Formspree notifications so replies go to that submitted address if needed.
 
-For production, submit a test report with a photo and confirm:
+For production, submit a test report and confirm:
 
 - email reaches `support@smartteamdigital.com`
 - Mariano receives a copy
-- the file appears in the Formspree submission
 - the Kit ID is included in the notification
 
 Endpoint smoke test:
