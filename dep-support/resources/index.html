@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Guides and Resources | FIFA Foundation</title>
+    <meta name="description" content="Hardware guides and first checks for FIFA Foundation Digital Education Programme micro:bit kits.">
+    <link rel="stylesheet" href="resources.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#module-list">Skip to module guides</a>
+    <header class="resources-header">
+      <nav class="topbar" aria-label="Resources navigation">
+        <a class="brand" href="../" aria-label="Back to FIFA Foundation support">
+          <img src="../assets/fifa-foundation-logo.png" alt="FIFA Foundation" width="220" height="102">
+        </a>
+        <div class="topbar-actions">
+          <a class="back-link" href="../">Support page</a>
+          <label class="language-picker">
+            <span>Language</span>
+            <select id="language-select" aria-label="Language">
+              <option value="en">EN</option>
+              <option value="fr">FR</option>
+              <option value="es">ES</option>
+              <option value="pt">PT</option>
+            </select>
+          </label>
+        </div>
+      </nav>
+      <div class="hero-content">
+        <p class="eyebrow">FIFA FOUNDATION</p>
+        <h1 data-i18n="title">Guides and Resources</h1>
+        <p class="hero-copy" data-i18n="intro">Practical module guides for the Digital Education Programme kit. Choose a component to review its setup, activity and first checks.</p>
+        <div class="hero-meta" aria-label="Resource collection summary">
+          <span><strong>13</strong> <span data-i18n="modules">module guides</span></span>
+          <span><strong>micro:bit V2</strong> <span data-i18n="platform">learning platform</span></span>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="resource-toolbar" aria-labelledby="browse-title">
+        <div>
+          <p class="eyebrow" data-i18n="browseEyebrow">Browse the kit</p>
+          <h2 id="browse-title" data-i18n="browseTitle">Find a module guide</h2>
+        </div>
+        <div class="controls">
+          <label class="search-field" for="module-search">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <span class="sr-only" data-i18n="searchLabel">Search modules</span>
+            <input id="module-search" type="search" autocomplete="off" placeholder="Search modules" data-i18n-placeholder="searchPlaceholder">
+          </label>
+          <label class="filter-field" for="kit-filter">
+            <span class="sr-only" data-i18n="filterLabel">Filter by kit</span>
+            <select id="kit-filter">
+              <option value="all" data-i18n="allKits">All kit modules</option>
+              <option value="robotics" data-i18n="roboticsKit">Robotics Kit</option>
+              <option value="physical" data-i18n="physicalKit">Physical Computing Kit</option>
+            </select>
+          </label>
+        </div>
+      </section>
+      <p class="results-count" id="results-count" aria-live="polite"></p>
+      <section class="module-list" id="module-list" aria-label="Module guides"></section>
+      <p class="empty-state" id="empty-state" hidden data-i18n="noResults">No modules match your search. Try another term.</p>
+      <section class="resource-note" aria-labelledby="note-title">
+        <div class="note-mark" aria-hidden="true">i</div>
+        <div>
+          <h2 id="note-title" data-i18n="noteTitle">About these resources</h2>
+          <p data-i18n="noteText">Video demonstrations, wiring diagrams and source files will be added as they are approved. The first checks below are practical guidance for review and should not replace the final safety instructions supplied with the kit.</p>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <p>FIFA Foundation &amp; Raco Systems Corp. support service.</p>
+      <p><a href="../">Support</a><span aria-hidden="true">/</span><a href="mailto:support@smartteamdigital.com">Contact</a></p>
+    </footer>
+    <script src="resources.js" defer></script>
+  </body>
+</html>

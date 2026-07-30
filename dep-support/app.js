@@ -1,6 +1,6 @@
 "use strict";
 
-const SUPPORT_FORM_ENDPOINT = "/api/support-request";
+const SUPPORT_FORM_ENDPOINT = "https://formspree.io/f/xeeydyyl";
 const RESOURCES_URL = "";
 const MAX_FILE_SIZE_BYTES = 15 * 1024 * 1024;
 const KIT_ID_PATTERN = /^(SR|SP)-\d{4}-[A-Z]-\d{6}$/;
@@ -114,7 +114,7 @@ const TRANSLATIONS = {
     reportIssue: "Report a Kit Issue",
     reportIssueHint: "Send a support request with the Kit ID included automatically.",
     resources: "Access Guides and Resources",
-    resourcesHint: "Learning materials link coming soon.",
+    resourcesHint: "Explore module guides, connections and first checks.",
     supportRequest: "Support request",
     formIntro: "Please complete the form below. Your Kit ID is included automatically so our support team can identify the product and its production record.",
     contactInfo: "Contact information",
@@ -150,6 +150,7 @@ const TRANSLATIONS = {
     invalidEmail: "Please enter a valid email address.",
     shortDescription: "Please add a little more detail to the problem description.",
     fileTooLarge: "The attached file is too large. Please upload a file smaller than 15 MB.",
+    endpointMissing: "The Formspree endpoint has not been configured yet. Update SUPPORT_FORM_ENDPOINT in app.js before publishing.",
     submitting: "Submitting your support request...",
     submitError: "We could not submit your request. Please check your connection and try again.",
     successStatus: "Thank you. Your support request has been submitted successfully.",
@@ -168,7 +169,7 @@ const TRANSLATIONS = {
     kitMissing: "Nous n'avons pas pu identifier votre kit automatiquement. Saisissez le Kit ID imprime pres du QR code.",
     reportIssue: "Signaler un probleme de kit",
     resources: "Guides et ressources",
-    resourcesHint: "Lien vers les ressources bientot disponible.",
+    resourcesHint: "Explorez les guides des modules et les premiers controles.",
     formIntro: "Completez le formulaire ci-dessous. Votre Kit ID est inclus automatiquement pour aider l'equipe support.",
     contactInfo: "Coordonnees",
     institution: "Ecole ou institution",
@@ -200,7 +201,7 @@ const TRANSLATIONS = {
     kitMissing: "No pudimos identificar el kit automaticamente. Ingrese el Kit ID impreso junto al codigo QR.",
     reportIssue: "Reportar un problema del kit",
     resources: "Guias y recursos",
-    resourcesHint: "El enlace a materiales estara disponible pronto.",
+    resourcesHint: "Explore las guias de modulos y las primeras verificaciones.",
     formIntro: "Complete el formulario. El Kit ID se incluye automaticamente para que soporte identifique el producto.",
     contactInfo: "Datos de contacto",
     institution: "Escuela o institucion",
@@ -232,7 +233,7 @@ const TRANSLATIONS = {
     kitMissing: "Nao foi possivel identificar o kit automaticamente. Digite o Kit ID impresso ao lado do QR code.",
     reportIssue: "Relatar problema do kit",
     resources: "Guias e recursos",
-    resourcesHint: "Link dos materiais em breve.",
+    resourcesHint: "Explore os guias dos modulos e as primeiras verificacoes.",
     formIntro: "Preencha o formulario. O Kit ID sera incluido automaticamente para ajudar o suporte.",
     contactInfo: "Informacoes de contato",
     institution: "Escola ou instituicao",
@@ -327,12 +328,8 @@ function cacheElements() {
 }
 
 function configureResourcesAction() {
-  if (!RESOURCES_URL) {
-    elements.resourcesLink.disabled = true;
-    return;
-  }
+  if (!RESOURCES_URL) return;
 
-  elements.resourcesLink.disabled = false;
   elements.resourcesLink.addEventListener("click", () => {
     window.open(RESOURCES_URL, "_blank", "noopener");
   });
@@ -527,6 +524,11 @@ async function handleSubmit(event) {
     return;
   }
 
+  if (SUPPORT_FORM_ENDPOINT === "REPLACE_WITH_FORMSPREE_ENDPOINT") {
+    setStatus(t("endpointMissing"), "error");
+    return;
+  }
+
   state.isSubmitting = true;
   elements.submitButton.disabled = true;
   elements.submitButton.textContent = t("submittingButton");
@@ -536,17 +538,19 @@ async function handleSubmit(event) {
     const payload = createSubmissionFormData();
     const response = await fetch(SUPPORT_FORM_ENDPOINT, {
       method: "POST",
+      headers: { Accept: "application/json" },
       body: payload,
     });
 
     if (!response.ok) {
-      throw new Error(`Request failed with status ${response.status}`);
+      const errorMessage = await parseFormspreeError(response);
+      throw new Error(errorMessage || `Request failed with status ${response.status}`);
     }
 
     const result = await parseJsonSafely(response);
     showSuccess(result);
   } catch (error) {
-    setStatus(t("submitError"), "error");
+    setStatus(error.message || t("submitError"), "error");
     state.isSubmitting = false;
     elements.submitButton.textContent = t("submit");
     updateSubmitAvailability();
@@ -680,6 +684,16 @@ async function parseJsonSafely(response) {
   const contentType = response.headers.get("content-type") || "";
   if (!contentType.includes("application/json")) return {};
   return response.json();
+}
+
+async function parseFormspreeError(response) {
+  const result = await parseJsonSafely(response);
+  if (!Array.isArray(result.errors) || !result.errors.length) return t("submitError");
+
+  return result.errors
+    .map((error) => error.message || error.code)
+    .filter(Boolean)
+    .join(" ");
 }
 
 function showSuccess(result = {}) {

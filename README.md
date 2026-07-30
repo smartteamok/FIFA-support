@@ -26,8 +26,14 @@ Production target:
 https://fifafoundation.smartteamdigital.com/dep-support/
 ```
 
+Guides and resources:
+
+```text
+https://fifafoundation.smartteamdigital.com/dep-support/resources/
+```
+
 Backend setup:
 
 ```text
-docs/vercel-resend.md
+docs/formspree-setup.md
 ```

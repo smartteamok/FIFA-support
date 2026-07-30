@@ -7,12 +7,21 @@ Static support page for educational kits distributed through the FIFA Foundation
 - `index.html`
 - `styles.css`
 - `app.js`
+- `resources/` - module guides and learning resources page
 
 Deploy the whole `dep-support/` folder under:
 
 ```text
 https://fifafoundation.smartteamdigital.com/dep-support/
 ```
+
+The guides page is available at:
+
+```text
+https://fifafoundation.smartteamdigital.com/dep-support/resources/
+```
+
+It currently includes 13 module guide outlines based on the FIFA micro:bit tutorial brief. Video links, wiring diagrams and source files are intentionally marked as coming soon until the final materials are approved. The first-check content is a review draft derived from the kit context, not a replacement for final safety instructions.
 
 ## Kit ID behavior
 
@@ -64,35 +73,31 @@ Expected: the Kit ID is rejected and manual entry is requested.
 
 ## Configure form submission
 
-The frontend submits to the Vercel API route:
+The form is configured for Formspree with this endpoint:
 
 ```js
-const SUPPORT_FORM_ENDPOINT = "/api/support-request";
+const SUPPORT_FORM_ENDPOINT = "https://formspree.io/f/xeeydyyl";
 ```
 
-The UI submits `multipart/form-data` with `fetch()` so evidence files can be uploaded. The Vercel API route sends the report by email through Resend.
+The HTML fallback uses the same endpoint:
 
-Configure these Vercel environment variables:
-
-```text
-RESEND_API_KEY
-SUPPORT_EMAIL_FROM
-SUPPORT_EMAIL_TO
+```html
+<form action="https://formspree.io/f/xeeydyyl" method="POST" enctype="multipart/form-data">
 ```
 
-Optional:
+The UI submits `multipart/form-data` with `fetch()` so evidence files can be uploaded. Formspree stores the submission and sends notification emails.
 
-```text
-SUPPORT_EMAIL_CC
-```
+Recommended Formspree configuration:
 
-See:
+1. Create a form in Formspree.
+2. Set `support@smartteamdigital.com` as the main recipient.
+3. Add `mariano.batistelli@smartteamdigital.com` as an additional notification recipient.
+4. Enable file uploads for the `evidence` field.
+5. Add validation for allowed file types and max size if available in the selected plan.
 
-```text
-../docs/vercel-resend.md
-```
+See `../docs/formspree-setup.md`.
 
-This is the simplest first backend because it removes WordPress from the submission path. The tradeoff is that email is not a database. If support volume grows, add WordPress/Fluent Forms, Supabase, Firebase, or Odoo later as the system of record.
+This is the simplest first backend because it removes WordPress, Resend DNS setup, and custom server code from the submission path. The tradeoff is that Formspree becomes the submission store. If support volume grows, add WordPress/Fluent Forms, Supabase, Firebase, or Odoo later as the system of record.
 
 For a very fast MVP, Google Apps Script can receive the JSON and append rows to Google Sheets, but repeat all validation server-side and do not treat the sheet as secure production infrastructure.
 

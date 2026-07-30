@@ -99,14 +99,13 @@
             <small data-i18n="reportIssueHint">Send a support request with the Kit ID included automatically.</small>
           </span>
         </a>
-        <!-- TODO: Replace with the final learning resources URL -->
-        <button class="action-card resource-action" id="resources-link" type="button" disabled>
+        <a class="action-card resource-action" id="resources-link" href="resources/">
           <span class="action-icon" aria-hidden="true">?</span>
           <span>
             <strong data-i18n="resources">Access Guides and Resources</strong>
-            <small data-i18n="resourcesHint">Learning materials link coming soon.</small>
+            <small data-i18n="resourcesHint">Explore module guides, connections and first checks.</small>
           </span>
-        </button>
+        </a>
       </section>
 
       <section class="form-shell" aria-labelledby="form-title">
@@ -121,7 +120,14 @@
 
         <div class="status-message" id="form-status" aria-live="polite"></div>
 
-        <form id="support-form" novalidate>
+        <form
+          id="support-form"
+          action="https://formspree.io/f/xeeydyyl"
+          method="POST"
+          enctype="multipart/form-data"
+          novalidate
+        >
+          <input type="hidden" name="_subject" value="FIFA Foundation kit support request">
           <input type="hidden" name="kit_id" id="kit-id-input">
           <input type="hidden" name="kit_type" id="kit-type-input">
           <input type="hidden" name="page_url" id="page-url-input">
