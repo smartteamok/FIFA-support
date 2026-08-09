@@ -7,7 +7,7 @@ Static support page for educational kits distributed through the FIFA Foundation
 - `index.html`
 - `styles.css`
 - `app.js`
-- `resources/` - module guides and learning resources page
+- `resources/` - guides listing and module guide pages
 - `success/` - confirmation page opened after a successful Formspree submission
 
 Deploy the whole `dep-support/` folder under:
@@ -22,7 +22,7 @@ The guides page is available at:
 https://fifafoundation.smartteamdigital.com/dep-support/resources/
 ```
 
-It currently includes 29 component guide outlines based on the supplied kit PDF and FIFA micro:bit tutorial brief. Video links, wiring diagrams and source files are intentionally marked as coming soon until the final materials are approved. The first-check content is a review draft derived from the kit context, not a replacement for final safety instructions.
+It covers the 29 kit components in two formats: 13 full module guides taken from the hardware documentation, and 16 short identification cards for the parts that have no tutorial of their own. See "Resources page" below.
 
 ## Kit ID behavior
 
@@ -104,15 +104,68 @@ This is the simplest first backend because it removes WordPress, Resend DNS setu
 
 For a very fast MVP, Google Apps Script can receive the JSON and append rows to Google Sheets, but repeat all validation server-side and do not treat the sheet as secure production infrastructure.
 
-## Resources URL
+## Resources page
 
-Open `app.js` and update:
+`resources/` holds the guides section. Data and prose are separate so translators
+never touch layout code:
+
+| File | Holds |
+| --- | --- |
+| `components.data.js` | The 29 components, their names and short summaries, kit and role labels, and the URL helpers shared by both pages |
+| `modules.data.js` | Structure of the 13 full guides: image paths, wire lists, part lists, video and program ids, short labels |
+| `modules.text.js` | All guide prose in EN, ES, FR and PT |
+| `resources.js` | The listing page |
+| `module/index.html`, `module.js`, `module.css` | The guide detail page, read as `resources/module/?m=<slug>` |
+
+Every content block in `modules.data.js` is optional, and the detail page renders
+a section only when its data exists. That is deliberate: the source material is
+uneven. Some modules document two wiring figures and some one; the power adapter
+documents charging states and has no program at all. Adding `states` or removing
+`program` from a module changes the page with no code change.
+
+URLs are built from `SITE_BASE` in `components.data.js` and are root-absolute, so
+pages keep working under Vercel's `cleanUrls` and `trailingSlash` rewrites. If the
+site ever moves out of `/dep-support/`, change that one constant.
+
+### Publishing module material
+
+Two things in `modules.data.js` stay `null` until the final material is approved,
+and each one has a visible placeholder in the meantime:
+
+1. **Video.** Upload the operation-steps video to Cloudflare Stream, then set
+   `CLOUDFLARE_SUBDOMAIN` once and the per-module `video.id` to the Stream video
+   id. `video.driveId` keeps the original Google Drive source for reference.
+   Until `video.id` is set, the section shows "the video is being published".
+2. **Program.** Commit the compiled file as
+   `assets/guides/<slug>/<slug>.hex` and set `program.hex` to that path. Until
+   then the card tells the teacher to rebuild the program from the blocks
+   screenshot, which is always shown. `vercel.json` serves `.hex` as an
+   attachment so browsers download instead of rendering it.
+
+Troubleshooting for each module carries a `troubleshootingStatus` of `draft` or
+`approved`. `draft` renders a visible "proposed guidance, pending review" note,
+because only the color sensor's troubleshooting came from the manual; the rest
+was derived from the documented operating principle.
+
+Wire colours are only listed where the manual states them (both servos and the
+RGB strip). Other modules list the connections to make without a colour swatch,
+so the legend never invents a colour a teacher could follow into a miswiring.
+
+French and Portuguese show a "translation pending review" banner, driven by
+`REVIEW_PENDING_LANGUAGES` in `components.data.js`. Remove a language from that
+list once its copy is signed off.
+
+### Resources URL
+
+`app.js` points the support form at the guides with:
 
 ```js
-const RESOURCES_URL = "";
+const RESOURCES_URL = "/dep-support/resources/";
 ```
 
-Keep this empty until the final learning resources URL is available. There is also a TODO comment in `index.html` beside the resources action.
+The guide cards link back the other way: "request a replacement" opens the form
+with the component preselected via `?component=`, carrying the `?id=` kit serial
+through when the visitor arrived with one.
 
 ## Languages
 
@@ -189,3 +242,8 @@ For WordPress, the simplest deployment options are:
 7. Try an invalid email and confirm the form blocks submission.
 8. Leave the endpoint placeholder unchanged and confirm the form warns that the endpoint must be configured.
 9. Configure a test endpoint and confirm the payload includes `kit_id`, `kit_type`, `page_url`, and `submitted_at`.
+10. Open `resources/` and confirm 29 components appear, split into 13 full guides and 16 identification cards.
+11. Open `resources/module/?m=power-adapter` and confirm the charging states appear and no program or parts section is rendered.
+12. Open `resources/module/?m=unknown` and confirm the page redirects to the listing.
+13. Switch to FR or PT and confirm the "translation pending review" banner appears on both pages.
+14. On an identification card, follow "request a replacement" and confirm the form opens with that component selected.

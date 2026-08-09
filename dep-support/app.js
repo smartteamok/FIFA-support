@@ -1,7 +1,7 @@
 "use strict";
 
 const SUPPORT_FORM_ENDPOINT = "https://formspree.io/f/xeeydyyl";
-const RESOURCES_URL = "";
+const RESOURCES_URL = "/dep-support/resources/";
 const KIT_ID_PATTERN = /^(SR|SP)-\d{4}-[A-Z]-\d{6}$/;
 const DEFAULT_LANGUAGE = "en";
 
@@ -546,13 +546,14 @@ document.addEventListener("DOMContentLoaded", init);
 function init() {
   cacheElements();
 
-  configureResourcesAction();
   elements.pageUrlInput.value = window.location.href;
   configureLanguage();
 
   const params = new URLSearchParams(window.location.search);
   const kitId = params.get("id");
   applyKitId(kitId, { source: "url" });
+  applyComponentFromUrl(params.get("component"));
+  configureResourcesAction();
 
   elements.applyKitIdButton.addEventListener("click", () => {
     applyKitId(elements.manualKitInput.value, { source: "manual" });
@@ -605,12 +606,18 @@ function cacheElements() {
   elements.submitButton = document.getElementById("submit-button");
 }
 
+/**
+ * Points the guides card at the resources page, carrying the kit serial through
+ * so the replacement links there come back with the serial already filled in.
+ */
 function configureResourcesAction() {
   if (!RESOURCES_URL) return;
 
-  elements.resourcesLink.addEventListener("click", () => {
-    window.open(RESOURCES_URL, "_blank", "noopener");
-  });
+  const params = new URLSearchParams();
+  if (state.kitId) params.set("id", state.kitId);
+  if (state.language) params.set("lang", state.language);
+  const query = params.toString();
+  elements.resourcesLink.href = query ? `${RESOURCES_URL}?${query}` : RESOURCES_URL;
 }
 
 function configureLanguage() {
@@ -645,6 +652,7 @@ function setLanguage(language) {
   populateComponents(state.kitType || "fallback");
   refreshKitCopy();
   updateSubmitText();
+  configureResourcesAction();
 }
 
 function t(key) {
@@ -684,6 +692,20 @@ function applyKitId(value, options = {}) {
   }
 
   updateSubmitAvailability();
+  configureResourcesAction();
+}
+
+/**
+ * Preselects the component when a module guide links here with ?component=.
+ * Ignored when the kit type is unknown, since the component list is generic then.
+ */
+function applyComponentFromUrl(component) {
+  if (!component) return;
+
+  const isAvailable = Array.from(elements.componentSelect.options).some((option) => option.value === component);
+  if (isAvailable) {
+    selectComponent(component);
+  }
 }
 
 function normalizeKitId(value) {
