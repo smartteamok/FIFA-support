@@ -129,31 +129,26 @@ site ever moves out of `/dep-support/`, change that one constant.
 
 ### Publishing module material
 
-Two things in `modules.data.js` stay `null` until the final material is approved,
-and each one has a visible placeholder in the meantime:
+The page never announces what is missing. A block with no data is simply left
+out, so an unfinished guide reads as a shorter guide rather than a construction
+site. Both of these stay `null` until the final material is approved:
 
 1. **Video.** Upload the operation-steps video to Cloudflare Stream, then set
    `CLOUDFLARE_SUBDOMAIN` once and the per-module `video.id` to the Stream video
    id. `video.driveId` keeps the original Google Drive source for reference.
-   Until `video.id` is set, the section shows "the video is being published".
-2. **Program.** Commit the compiled file as
-   `assets/guides/<slug>/<slug>.hex` and set `program.hex` to that path. Until
-   then the card tells the teacher to rebuild the program from the blocks
-   screenshot, which is always shown. `vercel.json` serves `.hex` as an
-   attachment so browsers download instead of rendering it.
-
-Troubleshooting for each module carries a `troubleshootingStatus` of `draft` or
-`approved`. `draft` renders a visible "proposed guidance, pending review" note,
-because only the color sensor's troubleshooting came from the manual; the rest
-was derived from the documented operating principle.
+   Until both are set, the guide has no video section at all.
+2. **Program.** Commit the compiled file as `assets/guides/<slug>/<slug>.hex`
+   and set `program.hex` to that path. Until then the program section shows the
+   description and the blocks screenshot without a download card.
+   `vercel.json` serves `.hex` as an attachment so browsers download instead of
+   rendering it.
 
 Wire colours are only listed where the manual states them (both servos and the
 RGB strip). Other modules list the connections to make without a colour swatch,
 so the legend never invents a colour a teacher could follow into a miswiring.
 
-French and Portuguese show a "translation pending review" banner, driven by
-`REVIEW_PENDING_LANGUAGES` in `components.data.js`. Remove a language from that
-list once its copy is signed off.
+What is still missing, and where each piece is loaded, is tracked in
+`../PENDIENTES.md`.
 
 ### Resources URL
 
@@ -165,7 +160,8 @@ const RESOURCES_URL = "/dep-support/resources/";
 
 The guide cards link back the other way: "request a replacement" opens the form
 with the component preselected via `?component=`, carrying the `?id=` kit serial
-through when the visitor arrived with one.
+through when the visitor arrived with one, plus `?lang=` so the form opens in
+the language the visitor was reading.
 
 ## Languages
 
@@ -176,7 +172,10 @@ The page includes a language selector for:
 - ES
 - PT
 
-Main interface text is translated in `TRANSLATIONS` inside `app.js`. The selector stores the last selected language in the browser with `localStorage`.
+Main interface text is translated in `TRANSLATIONS` inside `app.js`; component
+names come from `COMPONENT_NAMES` in `resources/components.data.js`. Both pages
+resolve the language the same way: `?lang=` first, then the last selection
+stored in `localStorage`, then the browser language, then English.
 
 ## Components
 
@@ -185,8 +184,12 @@ Component thumbnails are populated according to the detected kit type:
 - `SR-` shows Robotics Kit components from the Bhutan kit component list and robotics kit PDF.
 - `SP-` shows Physical Computing Kit components from the Bhutan kit component list and kit PDF.
 
-Images live in `assets/components/`. Map filenames in `COMPONENT_IMAGES` inside `app.js`.
-To update the lists later, edit `COMPONENTS_BY_KIT_TYPE` in `app.js`.
+Photos and display names come from `resources/components.data.js`, which the
+guides use too, so a part is called the same thing on both pages. The form loads
+that file and looks each component up by its English `formName`, which stays the
+value the form submits. To rename a component or swap its photo, edit
+`COMPONENT_NAMES` or `COMPONENTS` there; to change which components a kit lists,
+edit `COMPONENTS_BY_KIT_TYPE` in `app.js`.
 
 Deploy must include the `assets/` folder next to `index.html`.
 
@@ -245,5 +248,6 @@ For WordPress, the simplest deployment options are:
 10. Open `resources/` and confirm 29 components appear, split into 13 full guides and 16 identification cards.
 11. Open `resources/module/?m=power-adapter` and confirm the charging states appear and no program or parts section is rendered.
 12. Open `resources/module/?m=unknown` and confirm the page redirects to the listing.
-13. Switch to FR or PT and confirm the "translation pending review" banner appears on both pages.
-14. On an identification card, follow "request a replacement" and confirm the form opens with that component selected.
+13. Switch through all four languages and confirm no section announces missing material.
+14. On an identification card, read the guide in PT, follow "request a replacement", and confirm the form opens in PT with that component selected and the submitted value still the English name.
+15. Compare a component name on the form and on the guides in each language and confirm they read the same.

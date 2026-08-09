@@ -36,7 +36,7 @@ const COPY = {
     otherTitle: "Other kit components",
     otherCopy: "These parts have no video tutorial. Use the card to identify the part and request a replacement.",
     noteTitle: "About these resources",
-    noteText: "The full guides follow the approved hardware documentation. Troubleshooting marked as proposed is still pending review by the hardware team, and should not replace the safety instructions supplied with the kit.",
+    noteText: "The full guides follow the manufacturer's hardware documentation. They do not replace the safety instructions supplied with the kit. If a component fails after these checks, open a support request and the team will follow up with the school.",
   },
   es: {
     skipLink: "Saltar a las guías de componentes",
@@ -64,7 +64,7 @@ const COPY = {
     otherTitle: "Otros componentes del kit",
     otherCopy: "Estas piezas no tienen video tutorial. Use la ficha para identificar la pieza y pedir un repuesto.",
     noteTitle: "Sobre estos recursos",
-    noteText: "Las guías completas siguen la documentación de hardware aprobada. El diagnóstico marcado como propuesta está pendiente de revisión por el equipo de hardware y no reemplaza las instrucciones de seguridad que vienen con el kit.",
+    noteText: "Las guías completas siguen la documentación de hardware del fabricante. No reemplazan las instrucciones de seguridad que vienen con el kit. Si un componente falla después de estas verificaciones, abra una solicitud de soporte y el equipo dará seguimiento con la escuela.",
   },
   fr: {
     skipLink: "Aller aux guides des composants",
@@ -92,7 +92,7 @@ const COPY = {
     otherTitle: "Autres composants du kit",
     otherCopy: "Ces pièces n'ont pas de tutoriel vidéo. Utilisez la fiche pour identifier la pièce et demander un remplacement.",
     noteTitle: "À propos de ces ressources",
-    noteText: "Les guides complets suivent la documentation matérielle validée. Le diagnostic indiqué comme proposition est en attente de validation par l'équipe matériel et ne remplace pas les consignes de sécurité fournies avec le kit.",
+    noteText: "Les guides complets suivent la documentation matérielle du fabricant. Ils ne remplacent pas les consignes de sécurité fournies avec le kit. Si un composant tombe en panne après ces vérifications, ouvrez une demande de support et l'équipe assurera le suivi avec l'école.",
   },
   pt: {
     skipLink: "Ir para os guias de componentes",
@@ -120,7 +120,7 @@ const COPY = {
     otherTitle: "Outros componentes do kit",
     otherCopy: "Estas peças não têm vídeo tutorial. Use o cartão para identificar a peça e solicitar uma reposição.",
     noteTitle: "Sobre estes recursos",
-    noteText: "Os guias completos seguem a documentação de hardware aprovada. O diagnóstico marcado como proposta está pendente de revisão pela equipe de hardware e não substitui as instruções de segurança fornecidas com o kit.",
+    noteText: "Os guias completos seguem a documentação de hardware do fabricante. Não substituem as instruções de segurança fornecidas com o kit. Se um componente falhar depois destas verificações, abra uma solicitação de suporte e a equipe dará seguimento com a escola.",
   },
 };
 
@@ -210,7 +210,7 @@ function renderBasicCard(component) {
         </div>
       </div>
       <p class="card-footer">
-        <a href="${escapeHtml(supportRequestUrl(component.formName))}">${escapeHtml(SHARED_COPY[state.language].requestReplacement)} <span aria-hidden="true">→</span></a>
+        <a href="${escapeHtml(supportRequestUrl(component.formName, state.language))}">${escapeHtml(SHARED_COPY[state.language].requestReplacement)} <span aria-hidden="true">→</span></a>
       </p>
     </article>
   `;
@@ -252,7 +252,6 @@ function applyLanguage(language) {
   document.querySelectorAll("[data-i18n-placeholder]").forEach((node) => {
     node.placeholder = t(node.dataset.i18nPlaceholder);
   });
-  applyTranslationNotice(state.language);
 
   render();
 }

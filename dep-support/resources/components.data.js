@@ -279,7 +279,6 @@ const SHARED_COPY = {
     contact: "Contact",
     requestReplacement: "Request a replacement",
     includedInKit: "Included in the kit",
-    translationDraft: "This translation is pending review. The English version is the reference text.",
   },
   es: {
     languageLabel: "Idioma",
@@ -288,7 +287,6 @@ const SHARED_COPY = {
     contact: "Contacto",
     requestReplacement: "Pedir un repuesto",
     includedInKit: "Incluido en el kit",
-    translationDraft: "Esta traducción está pendiente de revisión. La versión en inglés es el texto de referencia.",
   },
   fr: {
     languageLabel: "Langue",
@@ -297,7 +295,6 @@ const SHARED_COPY = {
     contact: "Contact",
     requestReplacement: "Demander un remplacement",
     includedInKit: "Inclus dans le kit",
-    translationDraft: "Cette traduction est en attente de relecture. La version anglaise est le texte de référence.",
   },
   pt: {
     languageLabel: "Idioma",
@@ -306,23 +303,10 @@ const SHARED_COPY = {
     contact: "Contato",
     requestReplacement: "Solicitar uma reposição",
     includedInKit: "Incluído no kit",
-    translationDraft: "Esta tradução está pendente de revisão. A versão em inglês é o texto de referência.",
   },
 };
 
 const SUPPORTED_LANGUAGES = ["en", "fr", "es", "pt"];
-
-/** Languages whose copy is translated but not yet signed off. */
-const REVIEW_PENDING_LANGUAGES = ["fr", "pt"];
-
-/** Shows or hides the "translation pending review" banner for the current language. */
-function applyTranslationNotice(language) {
-  const notice = document.getElementById("translation-notice");
-  if (!notice) return;
-  const pending = REVIEW_PENDING_LANGUAGES.includes(language);
-  notice.hidden = !pending;
-  notice.textContent = pending ? SHARED_COPY[language].translationDraft : "";
-}
 
 /** Reads ?lang=, then the stored language, falling back to the browser and then English. */
 function resolveLanguage() {
@@ -348,11 +332,12 @@ function componentImageUrl(componentKey) {
  * Link to the support form with the component preselected, carrying the kit id
  * through when the current page already has one.
  */
-function supportRequestUrl(formName) {
+function supportRequestUrl(formName, language) {
   const params = new URLSearchParams();
   const kitId = new URLSearchParams(window.location.search).get("id");
   if (kitId) params.set("id", kitId);
   if (formName) params.set("component", formName);
+  if (language) params.set("lang", language);
   const query = params.toString();
   return query ? `${SITE_BASE}?${query}` : SITE_BASE;
 }

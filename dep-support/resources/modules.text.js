@@ -6,9 +6,11 @@
  * The English text is taken from "FIFA micro:bit Hardware Usage Videos and
  * Documentation" without rewriting. ES, FR and PT are translations of it.
  *
- * Troubleshooting entries are marked per module in modules.data.js:
- * "approved" means the text comes from the hardware document, "draft" means it
- * was derived from the documented operating principle and still needs review.
+ * troubleshootingStatus in modules.data.js records where each troubleshooting
+ * entry came from: "approved" is text from the hardware document, "draft" was
+ * derived from the documented operating principle. It is provenance for the
+ * hardware team's review, tracked in PENDIENTES.md, and is not shown on the
+ * page.
  */
 
 const MODULE_TEXT = {
