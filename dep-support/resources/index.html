@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Guides and Resources | FIFA Foundation</title>
-    <meta name="description" content="Hardware guides and first checks for FIFA Foundation Digital Education Programme micro:bit kits.">
+    <meta name="description" content="Hardware guides, wiring, programs and troubleshooting for FIFA Foundation Digital Education Programme micro:bit kits.">
     <link rel="stylesheet" href="resources.css">
   </head>
   <body>
-    <a class="skip-link" href="#module-list" data-i18n="skipLink">Skip to module guides</a>
+    <a class="skip-link" href="#module-list" data-i18n="skipLink">Skip to component guides</a>
     <header class="resources-header">
       <nav class="topbar" aria-label="Resources navigation">
         <a class="brand" href="../" aria-label="Back to FIFA Foundation support">
@@ -30,43 +30,60 @@
       <div class="hero-content">
         <p class="eyebrow">FIFA FOUNDATION</p>
         <h1 data-i18n="title">Guides and Resources</h1>
-        <p class="hero-copy" data-i18n="intro">Practical module guides for the Digital Education Programme kit. Choose a component to review its setup, activity and first checks.</p>
+        <p class="hero-copy" data-i18n="intro">Practical component guides for the Digital Education Programme kits. Choose a component to review its setup, activity and first checks.</p>
         <div class="hero-meta" aria-label="Resource collection summary">
-          <span><strong id="module-total">0</strong> <span data-i18n="modules">component guides</span></span>
+          <span><strong id="component-total">0</strong> <span data-i18n="components">kit components</span></span>
+          <span><strong id="guide-total">0</strong> <span data-i18n="fullGuides">full module guides</span></span>
           <span><strong>micro:bit V2</strong> <span data-i18n="platform">learning platform</span></span>
         </div>
       </div>
     </header>
     <main>
+      <p class="translation-notice" id="translation-notice" hidden></p>
       <section class="resource-toolbar" aria-labelledby="browse-title">
         <div>
           <p class="eyebrow" data-i18n="browseEyebrow">Browse the kit</p>
-          <h2 id="browse-title" data-i18n="browseTitle">Find a module guide</h2>
+          <h2 id="browse-title" data-i18n="browseTitle">Find a component guide</h2>
         </div>
         <div class="controls">
           <label class="search-field" for="module-search">
             <span class="search-icon" aria-hidden="true">⌕</span>
-            <span class="sr-only" data-i18n="searchLabel">Search modules</span>
-            <input id="module-search" type="search" autocomplete="off" placeholder="Search modules" data-i18n-placeholder="searchPlaceholder">
+            <span class="sr-only" data-i18n="searchLabel">Search components</span>
+            <input id="module-search" type="search" autocomplete="off" placeholder="Search components" data-i18n-placeholder="searchPlaceholder">
           </label>
           <label class="filter-field" for="kit-filter">
             <span class="sr-only" data-i18n="filterLabel">Filter by kit</span>
             <select id="kit-filter">
-              <option value="all" data-i18n="allKits">All kit modules</option>
-              <option value="robotics" data-i18n="roboticsKit">Robotics Kit</option>
-              <option value="physical" data-i18n="physicalKit">Physical Computing Kit</option>
+              <option value="all" data-i18n="allKits">All kit components</option>
+              <option value="robotics" data-i18n-kit="robotics">Robotics Kit</option>
+              <option value="physical" data-i18n-kit="physical">Physical Computing Kit</option>
+            </select>
+          </label>
+          <label class="filter-field" for="depth-filter">
+            <span class="sr-only" data-i18n="depthLabel">Filter by content</span>
+            <select id="depth-filter">
+              <option value="all" data-i18n="allContent">All content</option>
+              <option value="full" data-i18n="onlyFull">Full guides only</option>
+              <option value="basic" data-i18n="onlyBasic">Other components only</option>
             </select>
           </label>
         </div>
       </section>
       <p class="results-count" id="results-count" aria-live="polite"></p>
-      <section class="module-list" id="module-list" aria-label="Module guides"></section>
-      <p class="empty-state" id="empty-state" hidden data-i18n="noResults">No modules match your search. Try another term.</p>
+      <section class="module-list" id="module-list" aria-label="Full module guides"></section>
+      <section class="other-section" id="other-section" aria-labelledby="other-title" hidden>
+        <div class="section-divider">
+          <h2 id="other-title"><span data-i18n="otherTitle">Other kit components</span> <span class="section-count" id="other-count">0</span></h2>
+          <p data-i18n="otherCopy">These parts have no video tutorial. Use the card to identify the part and request a replacement.</p>
+        </div>
+        <div class="module-list" id="other-list"></div>
+      </section>
+      <p class="empty-state" id="empty-state" hidden data-i18n="noResults">No components match your search. Try another term.</p>
       <section class="resource-note" aria-labelledby="note-title">
         <div class="note-mark" aria-hidden="true">i</div>
         <div>
           <h2 id="note-title" data-i18n="noteTitle">About these resources</h2>
-          <p data-i18n="noteText">Video demonstrations, wiring diagrams and source files will be added as they are approved. The first checks below are practical guidance for review and should not replace the final safety instructions supplied with the kit.</p>
+          <p data-i18n="noteText">The full guides follow the approved hardware documentation. Troubleshooting marked as proposed is still pending review by the hardware team, and should not replace the safety instructions supplied with the kit.</p>
         </div>
       </section>
     </main>
@@ -74,6 +91,9 @@
       <p data-i18n="footerService">FIFA Foundation &amp; Raco Systems Corp. support service.</p>
       <p><a href="../" data-i18n="support">Support</a><span aria-hidden="true">/</span><a href="mailto:support@smartteamdigital.com" data-i18n="contact">Contact</a></p>
     </footer>
+    <script src="components.data.js" defer></script>
+    <script src="modules.data.js" defer></script>
+    <script src="modules.text.js" defer></script>
     <script src="resources.js" defer></script>
   </body>
 </html>
