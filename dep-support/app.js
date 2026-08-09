@@ -12,37 +12,16 @@ const KIT_TYPES = {
 
 const COMPONENT_IMAGE_BASE = "assets/components/";
 
-const COMPONENT_IMAGES = {
-  "Continuous Rotation Servo": "continuous-rotation-servo.png",
-  "Caster Wheel": "caster-wheel.png",
-  "Color Sensor Module": "color-sensor.png",
-  "DC Encoder Motor": "dc-encoder-motor.png",
-  "Joystick Module": "joystick-module.png",
-  "LCD Module": "lcd-module.png",
-  "Line Tracking Sensor": "line-tracking-sensor.png",
-  "Mechanical Chassis Kit": "mechanical-chassis-kit.png",
-  Tool: "tool.png",
-  "Potentiometer Module": "potentiometer.png",
-  "Power Adapter / Charger": "power-adapter.png",
-  "Soil Moisture Sensor": "soil-moisture-sensor.png",
-  "Ultrasonic Distance Sensor": "ultrasonic-distance-sensor.png",
-  Wheels: "wheel.png",
-  "Accessory & Screw Set": "accessory-screw-set.png",
-  "Jumper Wires (Female-to-Female)": "jumper-female-female.png",
-  "Micro:bit Expansion Shield": "microbit-expansion-shield.png",
-  Screw: "screw.png",
-  "180° Servomotor": "180-servomotor.png",
-  "RGB LED Strip": "rgb-led-strip.png",
-  "Micro:bit": "microbit.png",
-  "Plastic Ball": "plastic-ball.png",
-  "Micro USB Cable": "micro-usb-cable.png",
-  Batteries: "batteries.png",
-  "Battery Holder": "battery-holder.png",
-  Wearable: "wearable.png",
-  "Alligator Clip Wires": "alligator-clip-wires.png",
-  "Jumper Wires (Male-to-Male)": "jumper-male-male.png",
-  "Jumper Wires (Male-to-Female)": "jumper-male-female.png",
-};
+/**
+ * The guides own the component catalogue. resources/components.data.js maps
+ * every part to its photo and to its name in the four languages, so the form
+ * calls a part exactly what the guide calls it. The English formName stays the
+ * value the form submits, which is what support reports are keyed on.
+ */
+const COMPONENT_BY_FORM_NAME = new Map(COMPONENTS.map((entry) => [entry.formName, entry]));
+
+/** "Other" is a form-only option, so its label does not come from the catalogue. */
+const OTHER_COMPONENT_LABELS = { en: "Other", es: "Otro", fr: "Autre", pt: "Outro" };
 
 const COMPONENTS_BY_KIT_TYPE = {
   "Robotics Kit": [
@@ -102,106 +81,6 @@ const ISSUE_CATEGORIES = [
   "Documentation question",
   "Other",
 ];
-
-const COMPONENT_LABELS = {
-  en: {},
-  fr: {
-    "Continuous Rotation Servo": "Servomoteur a rotation continue",
-    "Caster Wheel": "Roue folle",
-    "Color Sensor Module": "Module capteur de couleur",
-    "DC Encoder Motor": "Moteur CC avec encodeur",
-    "Joystick Module": "Module joystick",
-    "LCD Module": "Module LCD",
-    "Line Tracking Sensor": "Capteur suiveur de ligne",
-    "Mechanical Chassis Kit": "Kit chassis mecanique",
-    Tool: "Outil",
-    "Potentiometer Module": "Module potentiometre",
-    "Power Adapter / Charger": "Adaptateur secteur / chargeur",
-    "Soil Moisture Sensor": "Capteur d'humidite du sol",
-    "Ultrasonic Distance Sensor": "Capteur de distance ultrasonique",
-    Wheels: "Roues",
-    Screw: "Vis",
-    "Accessory & Screw Set": "Jeu d'accessoires et de vis",
-    "Jumper Wires (Female-to-Female)": "Fils jumper femelle-femelle",
-    "Micro:bit Expansion Shield": "Carte d'extension micro:bit",
-    "180° Servomotor": "Servomoteur 180°",
-    "RGB LED Strip": "Ruban LED RVB",
-    "Micro:bit": "Micro:bit",
-    "Plastic Ball": "Ballon en plastique",
-    "Micro USB Cable": "Cable Micro USB",
-    Batteries: "Piles",
-    "Battery Holder": "Support de piles",
-    Wearable: "Support portable",
-    "Alligator Clip Wires": "Cables a pinces crocodile",
-    "Jumper Wires (Male-to-Male)": "Fils jumper male-male",
-    "Jumper Wires (Male-to-Female)": "Fils jumper male-femelle",
-    Other: "Autre",
-  },
-  es: {
-    "Continuous Rotation Servo": "Servo de rotacion continua",
-    "Caster Wheel": "Rueda loca",
-    "Color Sensor Module": "Modulo sensor de color",
-    "DC Encoder Motor": "Motor DC con encoder",
-    "Joystick Module": "Modulo joystick",
-    "LCD Module": "Modulo LCD",
-    "Line Tracking Sensor": "Sensor seguidor de linea",
-    "Mechanical Chassis Kit": "Kit de chasis mecanico",
-    Tool: "Herramienta",
-    "Potentiometer Module": "Modulo potenciometro",
-    "Power Adapter / Charger": "Adaptador / cargador",
-    "Soil Moisture Sensor": "Sensor de humedad del suelo",
-    "Ultrasonic Distance Sensor": "Sensor ultrasonico de distancia",
-    Wheels: "Ruedas",
-    Screw: "Tornillos",
-    "Accessory & Screw Set": "Set de accesorios y tornillos",
-    "Jumper Wires (Female-to-Female)": "Cables jumper hembra-hembra",
-    "Micro:bit Expansion Shield": "Shield de expansion micro:bit",
-    "180° Servomotor": "Servomotor 180°",
-    "RGB LED Strip": "Tira LED RGB",
-    "Micro:bit": "Micro:bit",
-    "Plastic Ball": "Pelota plastica",
-    "Micro USB Cable": "Cable Micro USB",
-    Batteries: "Baterias",
-    "Battery Holder": "Portabaterias",
-    Wearable: "Soporte wearable",
-    "Alligator Clip Wires": "Cables cocodrilo",
-    "Jumper Wires (Male-to-Male)": "Cables jumper macho-macho",
-    "Jumper Wires (Male-to-Female)": "Cables jumper macho-hembra",
-    Other: "Otro",
-  },
-  pt: {
-    "Continuous Rotation Servo": "Servo de rotacao continua",
-    "Caster Wheel": "Roda boba",
-    "Color Sensor Module": "Modulo sensor de cor",
-    "DC Encoder Motor": "Motor DC com encoder",
-    "Joystick Module": "Modulo joystick",
-    "LCD Module": "Modulo LCD",
-    "Line Tracking Sensor": "Sensor seguidor de linha",
-    "Mechanical Chassis Kit": "Kit de chassi mecanico",
-    Tool: "Ferramenta",
-    "Potentiometer Module": "Modulo potenciometro",
-    "Power Adapter / Charger": "Adaptador / carregador",
-    "Soil Moisture Sensor": "Sensor de umidade do solo",
-    "Ultrasonic Distance Sensor": "Sensor ultrassonico de distancia",
-    Wheels: "Rodas",
-    Screw: "Parafusos",
-    "Accessory & Screw Set": "Conjunto de acessorios e parafusos",
-    "Jumper Wires (Female-to-Female)": "Cabos jumper femea-femea",
-    "Micro:bit Expansion Shield": "Shield de expansao micro:bit",
-    "180° Servomotor": "Servomotor 180°",
-    "RGB LED Strip": "Fita LED RGB",
-    "Micro:bit": "Micro:bit",
-    "Plastic Ball": "Bola plastica",
-    "Micro USB Cable": "Cabo Micro USB",
-    Batteries: "Baterias",
-    "Battery Holder": "Suporte de baterias",
-    Wearable: "Suporte vestivel",
-    "Alligator Clip Wires": "Cabos jacare",
-    "Jumper Wires (Male-to-Male)": "Cabos jumper macho-macho",
-    "Jumper Wires (Male-to-Female)": "Cabos jumper macho-femea",
-    Other: "Outro",
-  },
-};
 
 const ISSUE_CATEGORY_LABELS = {
   en: {},
@@ -621,15 +500,9 @@ function configureResourcesAction() {
 }
 
 function configureLanguage() {
-  const storedLanguage = window.localStorage.getItem("supportLanguage");
-  const browserLanguage = (navigator.language || "").slice(0, 2).toLowerCase();
-  const language = TRANSLATIONS[storedLanguage]
-    ? storedLanguage
-    : TRANSLATIONS[browserLanguage]
-      ? browserLanguage
-      : DEFAULT_LANGUAGE;
-
-  setLanguage(language);
+  // resolveLanguage reads ?lang= first, so a guide that links here in Spanish
+  // opens the form in Spanish instead of falling back to the stored language.
+  setLanguage(resolveLanguage());
   elements.languageSelect.addEventListener("change", () => setLanguage(elements.languageSelect.value));
 }
 
@@ -747,10 +620,10 @@ function renderComponentPicker(options, selectedValue) {
       button.classList.add("is-selected");
     }
 
-    const imageFile = COMPONENT_IMAGES[component];
-    if (imageFile) {
+    const imageSrc = componentImageSrc(component);
+    if (imageSrc) {
       const image = document.createElement("img");
-      image.src = `${COMPONENT_IMAGE_BASE}${imageFile}`;
+      image.src = imageSrc;
       image.alt = "";
       image.loading = "lazy";
       button.appendChild(image);
@@ -816,7 +689,16 @@ function populateIssueCategories() {
 }
 
 function labelComponent(component) {
-  return COMPONENT_LABELS[state.language]?.[component] || component;
+  if (component === "Other") {
+    return OTHER_COMPONENT_LABELS[state.language] || OTHER_COMPONENT_LABELS.en;
+  }
+  const entry = COMPONENT_BY_FORM_NAME.get(component);
+  return (entry && COMPONENT_NAMES[state.language]?.[entry.key]) || component;
+}
+
+function componentImageSrc(component) {
+  const entry = COMPONENT_BY_FORM_NAME.get(component);
+  return entry ? `${COMPONENT_IMAGE_BASE}${entry.image}` : "";
 }
 
 function labelIssueCategory(category) {

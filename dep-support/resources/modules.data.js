@@ -9,8 +9,9 @@
  * modules document two wiring figures, some one, the power adapter documents
  * charging states and has no program at all.
  *
- * video.id and program.hex stay null until the material is published. See
- * README.md, "Publishing module material".
+ * video.id and program.hex stay null until the material is published, and the
+ * page simply leaves those blocks out rather than announcing what is missing.
+ * See README.md, "Publishing module material", and PENDIENTES.md.
  */
 
 const VIDEO_PROVIDER = "cloudflare";
@@ -19,9 +20,9 @@ const VIDEO_PROVIDER = "cloudflare";
 const CLOUDFLARE_SUBDOMAIN = "";
 
 /**
- * A video counts as published only when the provider is configured too, so a
- * module id pasted in before the Stream subdomain shows the pending note rather
- * than a broken player.
+ * A video counts as published only when the provider is configured too, so an
+ * id pasted in before the Stream subdomain leaves the section out rather than
+ * showing a broken player.
  */
 function isVideoPublished(video) {
   if (!video || !video.id) return false;
@@ -443,7 +444,6 @@ const MODULE_LABELS = {
     breadcrumbResources: "Guides and Resources",
     videoTitle: "Operation steps video",
     videoPlay: "Play the video for",
-    videoPending: "The video for this module is being published. The written guide below is complete.",
     howTitle: "How it works",
     whereTitle: "Where it is used",
     partsTitle: "What you need",
@@ -459,10 +459,7 @@ const MODULE_LABELS = {
     downloadTitle: "Program file",
     downloadAction: "Download .hex",
     downloadHint: "Open the file on a computer and drag it onto the MICROBIT drive. Phones and tablets cannot copy the file to the board.",
-    downloadPending: "The .hex file is being prepared. Build the program from the blocks above in the meantime.",
     troubleshootingTitle: "Troubleshooting",
-    draftNotice: "Proposed guidance, pending review by the hardware team.",
-    approvedNotice: "Reviewed by the hardware team.",
     stillTitle: "Still not working?",
     stillCopy: "Report the issue and the support team will follow up with the school.",
     stillAction: "Open a support request",
@@ -481,7 +478,6 @@ const MODULE_LABELS = {
     breadcrumbResources: "Guías y recursos",
     videoTitle: "Video de los pasos de operación",
     videoPlay: "Reproducir el video de",
-    videoPending: "El video de este módulo está en publicación. La guía escrita que sigue está completa.",
     howTitle: "Cómo funciona",
     whereTitle: "Dónde se usa",
     partsTitle: "Qué necesita",
@@ -497,10 +493,7 @@ const MODULE_LABELS = {
     downloadTitle: "Archivo del programa",
     downloadAction: "Descargar .hex",
     downloadHint: "Abra el archivo en una computadora y arrástrelo a la unidad MICROBIT. Los teléfonos y las tablets no pueden copiar el archivo a la placa.",
-    downloadPending: "El archivo .hex está en preparación. Mientras tanto, puede armar el programa con los bloques de arriba.",
     troubleshootingTitle: "Diagnóstico",
-    draftNotice: "Orientación propuesta, pendiente de revisión por el equipo de hardware.",
-    approvedNotice: "Revisado por el equipo de hardware.",
     stillTitle: "¿Sigue sin funcionar?",
     stillCopy: "Reporte el problema y el equipo de soporte hará el seguimiento con la escuela.",
     stillAction: "Abrir un pedido de soporte",
@@ -519,7 +512,6 @@ const MODULE_LABELS = {
     breadcrumbResources: "Guides et ressources",
     videoTitle: "Vidéo des étapes d'utilisation",
     videoPlay: "Lire la vidéo de",
-    videoPending: "La vidéo de ce module est en cours de publication. Le guide écrit ci-dessous est complet.",
     howTitle: "Comment ça marche",
     whereTitle: "Où on l'utilise",
     partsTitle: "Ce qu'il vous faut",
@@ -535,10 +527,7 @@ const MODULE_LABELS = {
     downloadTitle: "Fichier du programme",
     downloadAction: "Télécharger le .hex",
     downloadHint: "Ouvrez le fichier sur un ordinateur et faites-le glisser sur le lecteur MICROBIT. Les téléphones et tablettes ne peuvent pas copier le fichier sur la carte.",
-    downloadPending: "Le fichier .hex est en préparation. En attendant, reproduisez le programme à partir des blocs ci-dessus.",
     troubleshootingTitle: "Diagnostic",
-    draftNotice: "Conseils proposés, en attente de validation par l'équipe matériel.",
-    approvedNotice: "Validé par l'équipe matériel.",
     stillTitle: "Toujours en panne ?",
     stillCopy: "Signalez le problème et l'équipe de support assurera le suivi avec l'école.",
     stillAction: "Ouvrir une demande de support",
@@ -557,7 +546,6 @@ const MODULE_LABELS = {
     breadcrumbResources: "Guias e recursos",
     videoTitle: "Vídeo dos passos de operação",
     videoPlay: "Reproduzir o vídeo de",
-    videoPending: "O vídeo deste módulo está em publicação. O guia escrito abaixo está completo.",
     howTitle: "Como funciona",
     whereTitle: "Onde é usado",
     partsTitle: "O que você precisa",
@@ -573,10 +561,7 @@ const MODULE_LABELS = {
     downloadTitle: "Arquivo do programa",
     downloadAction: "Baixar .hex",
     downloadHint: "Abra o arquivo em um computador e arraste-o para a unidade MICROBIT. Telefones e tablets não conseguem copiar o arquivo para a placa.",
-    downloadPending: "O arquivo .hex está em preparação. Enquanto isso, monte o programa com os blocos acima.",
     troubleshootingTitle: "Diagnóstico",
-    draftNotice: "Orientação proposta, pendente de revisão pela equipe de hardware.",
-    approvedNotice: "Revisado pela equipe de hardware.",
     stillTitle: "Ainda não funciona?",
     stillCopy: "Relate o problema e a equipe de suporte fará o acompanhamento com a escola.",
     stillAction: "Abrir um pedido de suporte",

@@ -46,7 +46,6 @@ main { width: min(1120px, calc(100% - 40px)); margin: 0 auto; padding: 52px 0 72
 .search-icon { position: absolute; left: 14px; top: 10px; color: var(--muted); font-size: 1.35rem; pointer-events: none; }
 .filter-field select { padding-top: 12px; padding-bottom: 12px; }
 .results-count { min-height: 22px; margin-bottom: 18px; color: var(--muted); font-size: .9rem; }
-.translation-notice { margin: 0 0 22px; padding: 13px 17px; border-left: 4px solid #d9a520; border-radius: 8px; background: #fdf5e3; color: #6d5211; font-size: .88rem; }
 .module-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .module-card { overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); box-shadow: 0 8px 25px rgba(29, 70, 103, .06); transition: transform .2s ease, box-shadow .2s ease; }
 .module-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }

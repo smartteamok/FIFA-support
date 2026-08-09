@@ -68,7 +68,7 @@ function videoPosterUrl(id) {
 function availableSections() {
   const copy = text();
   const sections = [];
-  if (moduleData.video) sections.push({ id: "video", title: label("videoTitle"), render: renderVideo });
+  if (isVideoPublished(moduleData.video)) sections.push({ id: "video", title: label("videoTitle"), render: renderVideo });
   if (copy.principle) sections.push({ id: "how-it-works", title: label("howTitle"), render: renderHowItWorks });
   if (moduleData.parts) sections.push({ id: "parts", title: label("partsTitle"), render: renderParts });
   if (moduleData.wiring) sections.push({ id: "connection", title: label("connectionTitle"), render: renderConnection });
@@ -82,9 +82,6 @@ function availableSections() {
 
 function renderVideo() {
   const { video } = moduleData;
-  if (!isVideoPublished(video)) {
-    return `<p class="pending-note">${escapeHtml(label("videoPending"))}</p>`;
-  }
   const poster = videoPosterUrl(video.id);
   const posterStyle = poster ? ` style="background-image:url('${escapeHtml(poster)}')"` : "";
   return `
@@ -180,17 +177,13 @@ function renderProgram() {
         <a class="download-action" href="${escapeHtml(assetUrl(program.hex))}" download="${escapeHtml(`${moduleData.slug}.hex`)}">${escapeHtml(label("downloadAction"))}</a>
         <p class="download-hint">${escapeHtml(label("downloadHint"))}</p>
       </div>`
-    : `<div class="download-card is-pending">
-        <p class="download-title">${escapeHtml(label("downloadTitle"))}</p>
-        <p class="download-hint">${escapeHtml(label("downloadPending"))}</p>
-      </div>`;
-  return `${description}<div class="program-grid">${blocks}${download}</div>`;
+    : "";
+  return `${description}<div class="program-grid${download ? "" : " is-blocks-only"}">${blocks}${download}</div>`;
 }
 
 function renderTroubleshooting() {
-  const copy = text();
-  const items = copy.troubleshooting
-    .map(
+  return text()
+    .troubleshooting.map(
       (entry) => `
       <details class="issue">
         <summary>${escapeHtml(entry.issue)}</summary>
@@ -198,9 +191,6 @@ function renderTroubleshooting() {
       </details>`
     )
     .join("");
-  const isDraft = moduleData.troubleshootingStatus === "draft";
-  const notice = `<p class="status-note ${isDraft ? "is-draft" : "is-approved"}">${escapeHtml(isDraft ? label("draftNotice") : label("approvedNotice"))}</p>`;
-  return `${items}${notice}`;
 }
 
 function renderClosing() {
@@ -208,7 +198,7 @@ function renderClosing() {
     <section class="closing-card">
       <h2>${escapeHtml(label("stillTitle"))}</h2>
       <p>${escapeHtml(label("stillCopy"))}</p>
-      <a class="closing-action" href="${escapeHtml(supportRequestUrl(componentFormName()))}">${escapeHtml(label("stillAction"))}</a>
+      <a class="closing-action" href="${escapeHtml(supportRequestUrl(componentFormName(), state.language))}">${escapeHtml(label("stillAction"))}</a>
     </section>
   `;
 }
@@ -293,7 +283,6 @@ function render() {
   document.documentElement.lang = state.language;
   window.localStorage.setItem("supportLanguage", state.language);
   elements.languageSelect.value = state.language;
-  applyTranslationNotice(state.language);
 
   renderHero();
 
