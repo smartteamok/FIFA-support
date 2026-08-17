@@ -7,7 +7,7 @@
 .module-hero h1 { font-size: clamp(1.9rem, 4vw, 3.1rem); margin-bottom: 14px; }
 .module-hero .hero-copy { margin-bottom: 20px; }
 .module-hero-figure { margin: 0; display: grid; place-items: center; padding: 22px; border-radius: 14px; background: rgba(255, 255, 255, .66); }
-.module-hero-figure img { width: 100%; max-width: 240px; height: auto; object-fit: contain; mix-blend-mode: multiply; }
+.module-hero-figure img { width: 100%; max-width: 240px; height: auto; object-fit: contain; }
 
 .breadcrumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 18px; color: #46718c; font-size: .82rem; }
 .breadcrumbs a { text-decoration: none; font-weight: 700; color: var(--blue-dark); }
@@ -90,7 +90,7 @@
 .aside-related li + li { margin-top: 4px; }
 .aside-related a { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 8px; border-radius: 8px; color: var(--ink); font-size: .87rem; font-weight: 600; text-decoration: none; }
 .aside-related a:hover, .aside-related a:focus-visible { background: var(--wash); }
-.aside-related img { flex: 0 0 44px; width: 44px; height: 44px; object-fit: contain; border-radius: 6px; background: #edf7fa; mix-blend-mode: multiply; }
+.aside-related img { flex: 0 0 44px; width: 44px; height: 44px; object-fit: contain; border-radius: 6px; background: #edf7fa; }
 
 @media (max-width: 980px) {
   .module-hero { grid-template-columns: 1fr; gap: 24px; padding-bottom: 40px; }

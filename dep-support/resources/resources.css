@@ -51,7 +51,7 @@ main { width: min(1120px, calc(100% - 40px)); margin: 0 auto; padding: 52px 0 72
 .module-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
 .module-top { display: grid; grid-template-columns: 132px 1fr; min-height: 170px; }
 .module-image { display: flex; align-items: center; justify-content: center; padding: 15px; background: #edf7fa; }
-.module-image img { width: 100%; max-height: 140px; object-fit: contain; mix-blend-mode: multiply; }
+.module-image img { width: 100%; max-height: 140px; object-fit: contain; }
 .module-summary { display: flex; flex-direction: column; justify-content: center; padding: 22px 22px 18px; }
 .module-kicker { margin-bottom: 7px; color: var(--blue); font-size: .74rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 .module-summary h3 { margin-bottom: 8px; font-size: 1.2rem; line-height: 1.18; }

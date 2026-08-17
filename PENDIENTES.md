@@ -4,7 +4,7 @@ La web publicada no anuncia nada como provisorio: cuando falta material, la
 sección simplemente no se dibuja. Este archivo es el registro de lo que todavía
 falta y de dónde se carga cada cosa.
 
-Última revisión: 8 de agosto de 2026.
+Última revisión: 17 de agosto de 2026.
 
 ## 1. Videos (12 módulos)
 
@@ -66,18 +66,18 @@ recomprimió. Ordenadas por impacto:
 3. **Fotos de conexión terminada a 1200 px o más**, para los diez módulos que
    están por debajo. Ya están bien las de puertos de la placa de expansión y
    orden de cables del servo 180°.
-4. **Fichas de componentes.** Las 29 quedaron sobre el mismo fondo. Micro:bit y
-   cable micro USB se recortaron de las fotos de las guías, y los cables jumper
-   macho-macho conservan su foto original con el fondo aplanado. Pilas,
-   portapilas, soporte wearable y tornillos solo perdieron el recuadro blanco
-   que traían del PDF: siguen en baja resolución. Se decidió dejarlas así; si
-   más adelante se quieren mejorar, alcanza con fotos tomadas como las de las
-   guías.
+4. **Fichas de componentes.** Las 29 se reemplazaron el 17 de agosto de 2026
+   con las PNG recortadas de `Part List Image` (Physical Computing Kit y
+   Robotics Kit). El jumper macho-macho venía opaco sobre blanco y se le
+   quitó el fondo. El set de accesorios sigue siendo una tuerca (M3), no una
+   foto del set; el tornillo es un M2×8 suelto, no un collage de fijaciones.
 
 ## 6. Detalles de consistencia
 
-- `accessory-screw-set.png` es un render 3D de una tuerca sola, no una foto del
-  set de accesorios y tornillos que nombra la ficha.
+- `accessory-screw-set.png` es una tuerca M3 (foto del listado de partes), no
+  una foto del set de accesorios y tornillos que nombra la ficha.
+- `screw.png` es un tornillo M2×8 suelto; el listado de partes no trae una
+  foto de grupo de fijaciones.
 
 ## 7. Wire colors
 
